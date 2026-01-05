@@ -4,7 +4,7 @@ import "../scss/main.scss";
 import "./globals.css";
 
 const myshkin = localFont({
-  src: "../fonts/Myshkin-Regular.woff2",
+  src: "../fonts/Myshkin2-Regular.woff2",
   variable: "--font-myshkin",
   display: "swap",
 });
