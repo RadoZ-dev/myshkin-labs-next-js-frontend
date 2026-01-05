@@ -1,0 +1,21 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+// Colors
+$color-primary: #000000;
+$color-secondary: #ffffff;
+$color-background: #ffffff;
+$color-foreground: #171717;
+
+// Typography
+$font-family-primary: var(--font-myshkin), sans-serif;
+
+// Spacing
+$spacing-unit: 1rem;
+
+// Breakpoints
+$breakpoint-mobile: 640px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+$breakpoint-wide: 1280px;

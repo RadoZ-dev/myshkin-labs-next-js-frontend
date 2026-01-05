@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Myshkin Labs
+
+A digital laboratory for creative exploration — where music, code, and ideas evolve. Built as a modern headless WordPress site with Next.js frontend.
+
+## Concept
+
+Myshkin Labs is not a traditional blog. It's a creative laboratory organized like a real workspace, with sections that reflect the organic process of creation:
+
+### 🧪 **Experiments**
+Everything in process — demo tracks, musical sketches, unfinished code, raw ideas. The messy, evolving work that happens before polish.
+
+### 🔧 **Instruments**
+The tools of the trade — guitars, software, plugins, frameworks, and anything else used to create. A catalog of what makes the work possible.
+
+### 📝 **Notes**
+Short thoughts, philosophy, insights, "aha" moments. Observations from the laboratory floor.
+
+### 🚀 **Releases**
+When something leaves the laboratory and becomes "official" — finished projects, published music, completed code.
+
+---
+
+## Tech Stack
+
+- **Framework**: Next.js 16 with App Router
+- **Language**: TypeScript
+- **CMS**: Headless WordPress (backend)
+- **Styling**: Tailwind CSS + Flowbite + SCSS (7-1 pattern)
+- **Typography**: Custom Myshkin font
+- **Architecture**: JAMstack with REST/GraphQL API
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Development
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*Myshkin Labs* — where creativity meets experimentation.

@@ -1,0 +1,30 @@
+// -----------------------------------------------------------------------------
+// Main SCSS file that imports all partials
+// 7-1 Pattern: 7 folders, 1 file
+// -----------------------------------------------------------------------------
+
+// 1. Abstracts
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+
+// 2. Vendors
+@import 'vendors/vendors';
+
+// 3. Base
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/base';
+
+// 4. Layout
+@import 'layout/header';
+@import 'layout/footer';
+
+// 5. Components
+@import 'components/buttons';
+
+// 6. Pages
+@import 'pages/home';
+
+// 7. Themes
+@import 'themes/default';
