@@ -4,28 +4,23 @@ import { Button } from "flowbite-react";
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <div className="myshkin-labs-home min-h-screen">
       {/* Hero Section */}
-      <section className="bg-white dark:bg-gray-900">
-        <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
-          <div className="mr-auto place-self-center lg:col-span-7">
-            <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
-              MИШKiN LAБS
-            </h1>
-            <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-              Building modern web experiences with Next.js, Tailwind CSS, and headless WordPress. 
-              Start creating something amazing today.
-            </p>
-            <div className="flex gap-4">
-              <Button size="lg" color="dark">
-                Get Started
-              </Button>
-              <Button size="lg" color="light">
-                Learn More
-              </Button>
-            </div>
-          </div>
-        </div>
+      <section className="myshkin-labs-home__hero w-full h-screen flex flex-col items-center justify-center">
+        <h1 className="font-extrabold tracking-tight leading-none">
+          MИШKiN LAБS
+        </h1>
+        <p className="myshkin-labs-home__subtitle mt-4 text-lg text-gray-500 dark:text-gray-400">
+          Sound. Code. Experiments.
+        </p>
+        <Button
+          className="button mt-6 rounded-full"
+          color="dark"
+          size="lg"
+          href="#features"
+        >
+          Latest Experiment
+        </Button>
       </section>
 
       {/* Feature Section */}
