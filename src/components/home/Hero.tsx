@@ -83,44 +83,47 @@ export default function Hero() {
 
   return (
     <section className="myshkin-labs-home__hero w-full h-screen flex flex-col items-center justify-center">
-      <h1 
-        ref={h1Ref}
-        className="font-extrabold tracking-tight leading-none"
-      >
-        MИШKiN LAБS
-      </h1>
-
-      <p 
-        ref={subtitleRef}
-        className="myshkin-labs-home__subtitle mt-4 text-lg text-gray-500 dark:text-gray-400"
-      >
-        Sound. Code. Experiments.
-      </p>
-
-      {latestExperiment && !loading && (
-        <p
-          ref={expRef}
-          className="mt-6 text-sm font-mono text-gray-600 dark:text-gray-300"
+      <div className="max-w-7xl  mx-auto px-4 text-center">
+        <h1 
+          ref={h1Ref}
+          className="font-extrabold tracking-tight leading-none"
         >
-          EXP #{latestExperiment.experimentNumber}: {latestExperiment.title}
+          MИШKiN LAБS
+        </h1>
+
+        <p 
+          ref={subtitleRef}
+          className="myshkin-labs-home__subtitle mt-4 text-lg text-gray-500 dark:text-gray-400"
+        >
+          Sound. Code. Experiments.
         </p>
-      )}
 
-      <div
-        ref={buttonRef}
-        onMouseEnter={() => handleButtonHover(true)}
-        onMouseLeave={() => handleButtonHover(false)}
-        onClick={handleButtonClick}
-      >
-        <Button
-          className="button mt-4 rounded-full"
-          color="dark"
-          size="lg"
-          href={latestExperiment?.uri || "#features"}
-          disabled={loading}
+        {latestExperiment && !loading && (
+          <p
+            ref={expRef}
+            className="mt-6 text-sm font-mono text-gray-600 dark:text-gray-300"
+          >
+            EXP #{latestExperiment.experimentNumber}: {latestExperiment.title}
+          </p>
+        )}
+
+        <div
+          ref={buttonRef}
+          className="inline-block"
+          onMouseEnter={() => handleButtonHover(true)}
+          onMouseLeave={() => handleButtonHover(false)}
+          onClick={handleButtonClick}
         >
-          {loading ? "Loading..." : "Read More"}
-        </Button>
+          <Button
+            className="button mt-4 rounded-full"
+            color="dark"
+            size="lg"
+            href={latestExperiment?.uri || "#features"}
+            disabled={loading}
+          >
+            {loading ? "Loading..." : "Read More"}
+          </Button>
+        </div>
       </div>
     </section>
   );

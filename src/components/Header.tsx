@@ -188,99 +188,99 @@ export default function Header() {
   ];
 
   return (
-    <header className="myshkin-labs-header bg-white shadow-md py-4 px-4 sticky top-0 z-50">
-      <nav className="container mx-auto sm:px-6 lg:px-8">
+    <header className="myshkin-labs-header bg-white shadow-md py-4 sticky top-0 z-50">
+      <nav className="max-w-7xl px-4" style={{ margin: '0 auto' }}>
         <div className="flex justify-between items-center h-16">
-          <div className="flex-shrink-0">
-            <Link href="/" className="myshkin-labs-header__logo text-2xl font-bold text-gray-800 hover:text-gray-600 transition-colors">
-              MИШKiN LAБS
-            </Link>
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="myshkin-labs-header__top-menu hidden md:flex md:items-center md:space-x-8">
-            {menuItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
-              >
-                {item.label}
+            <div className="flex-shrink-0">
+              <Link href="/" className="myshkin-labs-header__logo text-2xl font-bold text-gray-800 hover:text-gray-600 transition-colors">
+                MИШKiN LAБS
               </Link>
-            ))}
-          </div>
+            </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              onClick={toggleMenu}
-              type="button"
-              className="myshkin-labs-header__burger-dropdown-button inline-flex items-center justify-center p-2 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-inset transition-colors"
-              aria-expanded={isMenuOpen}
-              aria-label="Toggle menu"
-            >
-              <span className="sr-only">{isMenuOpen ? 'Close menu' : 'Open main menu'}</span>
-              <svg
-                ref={svgRef}
-                className="block h-8 w-8"
-                xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
-                viewBox="0 0 30 30.000001"
-                fill="currentColor"
+            {/* Desktop Menu */}
+            <div className="myshkin-labs-header__top-menu hidden md:flex md:items-center md:space-x-8">
+              {menuItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <button
+                onClick={toggleMenu}
+                type="button"
+                className="myshkin-labs-header__burger-dropdown-button inline-flex items-center justify-center p-2 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-inset transition-colors"
+                aria-expanded={isMenuOpen}
+                aria-label="Toggle menu"
               >
-                <path
-                  ref={path1Ref}
-                  d="M 3.675781 4.644531 C 27.121094 4.863281 28.5 5.152344 28.933594 5.734375 C 29.226562 5.953125 29.296875 6.386719 29.226562 6.605469 C 29.082031 6.824219 28.5 7.183594 28.28125 7.113281 C 27.992188 7.039062 27.554688 6.386719 27.628906 6.097656 C 27.703125 5.878906 28.71875 5.515625 28.933594 5.660156 C 29.082031 5.804688 28.863281 7.039062 28.644531 7.113281 C 28.425781 7.183594 27.554688 6.460938 27.628906 6.167969 C 27.703125 5.953125 28.789062 5.515625 28.933594 5.734375 C 29.152344 5.878906 29.152344 6.675781 28.789062 7.039062 C 27.917969 7.839844 23.636719 7.402344 20.371094 7.476562 C 15.796875 7.476562 5.855469 7.984375 3.675781 6.824219 C 3.023438 6.460938 2.589844 5.878906 2.660156 5.515625 C 2.660156 5.152344 3.675781 4.644531 3.675781 4.644531"
-                />
-                <path
-                  ref={path2Ref}
-                  d="M 3.75 14.878906 C 21.53125 15.75 25.015625 14.734375 26.539062 15.167969 C 27.265625 15.386719 27.484375 16.113281 27.917969 16.183594 C 28.355469 16.257812 29.007812 15.675781 29.226562 15.894531 C 29.445312 15.96875 29.589844 16.621094 29.445312 16.839844 C 29.371094 17.054688 28.789062 17.347656 28.574219 17.273438 C 28.28125 17.203125 27.847656 16.546875 27.917969 16.257812 C 27.992188 16.039062 28.71875 15.605469 28.933594 15.675781 C 29.226562 15.75 29.589844 16.476562 29.515625 16.765625 C 29.296875 17.273438 27.628906 17.492188 26.394531 17.78125 C 24.363281 18.144531 21.460938 18.363281 18.410156 18.363281 C 14.417969 18.289062 6.796875 17.855469 4.476562 17.054688 C 3.675781 16.765625 3.023438 16.476562 2.953125 16.039062 C 2.878906 15.75 3.75 14.878906 3.75 14.878906"
-                />
-                <path
-                  ref={path3Ref}
-                  d="M 3.316406 24.097656 C 16.234375 24.167969 20.007812 23.082031 22.839844 23.007812 C 25.015625 23.007812 27.773438 23.007812 28.71875 23.515625 C 29.082031 23.734375 29.226562 24.097656 29.226562 24.386719 C 29.226562 24.605469 28.863281 25.113281 28.574219 25.113281 C 28.355469 25.183594 27.703125 24.75 27.628906 24.460938 C 27.554688 24.167969 28.066406 23.589844 28.355469 23.515625 C 28.574219 23.445312 29.082031 23.734375 29.152344 24.023438 C 29.296875 24.316406 29.152344 24.75 28.71875 25.113281 C 27.121094 26.203125 17.976562 26.855469 13.476562 26.925781 C 9.992188 27 5.710938 26.78125 3.96875 26.203125 C 3.242188 25.910156 2.589844 25.546875 2.515625 25.183594 C 2.515625 24.824219 3.316406 24.097656 3.316406 24.097656"
-                />
-              </svg>
-            </button>
+                <span className="sr-only">{isMenuOpen ? 'Close menu' : 'Open main menu'}</span>
+                <svg
+                  ref={svgRef}
+                  className="block h-8 w-8"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="40"
+                  height="40"
+                  viewBox="0 0 30 30.000001"
+                  fill="currentColor"
+                >
+                  <path
+                    ref={path1Ref}
+                    d="M 3.675781 4.644531 C 27.121094 4.863281 28.5 5.152344 28.933594 5.734375 C 29.226562 5.953125 29.296875 6.386719 29.226562 6.605469 C 29.082031 6.824219 28.5 7.183594 28.28125 7.113281 C 27.992188 7.039062 27.554688 6.386719 27.628906 6.097656 C 27.703125 5.878906 28.71875 5.515625 28.933594 5.660156 C 29.082031 5.804688 28.863281 7.039062 28.644531 7.113281 C 28.425781 7.183594 27.554688 6.460938 27.628906 6.167969 C 27.703125 5.953125 28.789062 5.515625 28.933594 5.734375 C 29.152344 5.878906 29.152344 6.675781 28.789062 7.039062 C 27.917969 7.839844 23.636719 7.402344 20.371094 7.476562 C 15.796875 7.476562 5.855469 7.984375 3.675781 6.824219 C 3.023438 6.460938 2.589844 5.878906 2.660156 5.515625 C 2.660156 5.152344 3.675781 4.644531 3.675781 4.644531"
+                  />
+                  <path
+                    ref={path2Ref}
+                    d="M 3.75 14.878906 C 21.53125 15.75 25.015625 14.734375 26.539062 15.167969 C 27.265625 15.386719 27.484375 16.113281 27.917969 16.183594 C 28.355469 16.257812 29.007812 15.675781 29.226562 15.894531 C 29.445312 15.96875 29.589844 16.621094 29.445312 16.839844 C 29.371094 17.054688 28.789062 17.347656 28.574219 17.273438 C 28.28125 17.203125 27.847656 16.546875 27.917969 16.257812 C 27.992188 16.039062 28.71875 15.605469 28.933594 15.675781 C 29.226562 15.75 29.589844 16.476562 29.515625 16.765625 C 29.296875 17.273438 27.628906 17.492188 26.394531 17.78125 C 24.363281 18.144531 21.460938 18.363281 18.410156 18.363281 C 14.417969 18.289062 6.796875 17.855469 4.476562 17.054688 C 3.675781 16.765625 3.023438 16.476562 2.953125 16.039062 C 2.878906 15.75 3.75 14.878906 3.75 14.878906"
+                  />
+                  <path
+                    ref={path3Ref}
+                    d="M 3.316406 24.097656 C 16.234375 24.167969 20.007812 23.082031 22.839844 23.007812 C 25.015625 23.007812 27.773438 23.007812 28.71875 23.515625 C 29.082031 23.734375 29.226562 24.097656 29.226562 24.386719 C 29.226562 24.605469 28.863281 25.113281 28.574219 25.113281 C 28.355469 25.183594 27.703125 24.75 27.628906 24.460938 C 27.554688 24.167969 28.066406 23.589844 28.355469 23.515625 C 28.574219 23.445312 29.082031 23.734375 29.152344 24.023438 C 29.296875 24.316406 29.152344 24.75 28.71875 25.113281 C 27.121094 26.203125 17.976562 26.855469 13.476562 26.925781 C 9.992188 27 5.710938 26.78125 3.96875 26.203125 C 3.242188 25.910156 2.589844 25.546875 2.515625 25.183594 C 2.515625 24.824219 3.316406 24.097656 3.316406 24.097656"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
 
-      {/* Mobile Menu Panel - Absolute positioned to overlay content */}
-      {isMenuOpen && (
-        <div 
-          ref={menuPanelRef}
-          className="myshkin-labs-header__top-menu md:hidden absolute top-16 left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-40 overflow-hidden"
-          style={{ height: 0, opacity: 0 }}
-        >
+        {/* Mobile Menu Panel - Absolute positioned to overlay content */}
+        {isMenuOpen && (
           <div 
-            ref={menuItemsRef}
-            className="myshkin-labs-header__top-menu-content px-2 pt-2 pb-3 space-y-1 sm:px-3"
+            ref={menuPanelRef}
+            className="myshkin-labs-header__top-menu md:hidden absolute top-16 left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-40 overflow-hidden"
+            style={{ height: 0, opacity: 0 }}
           >
-            {menuItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="block px-3 py-2 rounded-md text-base font-medium transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
+            <div 
+              ref={menuItemsRef}
+              className="myshkin-labs-header__top-menu-content px-2 pt-2 pb-3 space-y-1 sm:px-3"
+            >
+              {menuItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="block px-3 py-2 rounded-md text-base font-medium transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+            <div ref={catImageRef} className="absolute">
+              <Image 
+                src={catImage}
+                alt="Cat" 
+                width={160}
+                height={160}
+                className="myshkin-labs-header__cat-image pointer-events-none"
+                priority
+              />
+            </div>
           </div>
-          <div ref={catImageRef} className="absolute">
-            <Image 
-              src={catImage}
-              alt="Cat" 
-              width={160}
-              height={160}
-              className="myshkin-labs-header__cat-image pointer-events-none"
-              priority
-            />
-          </div>
-        </div>
-      )}
+        )}
     </header>
   );
 }
