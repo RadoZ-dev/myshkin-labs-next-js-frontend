@@ -45,7 +45,7 @@ export default function Hero() {
     gsap.fromTo(
       buttonRef.current,
       { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, delay: 1 }
+      { opacity: 1, y: 0, duration: 1, delay: 0.1 }
     );
   }, []);
 
