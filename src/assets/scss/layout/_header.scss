@@ -59,6 +59,11 @@
         }
     }
 
+    &__burger-dropdown-button {
+        background: none;
+        cursor: pointer;   
+    }
+
     &__cat-image {
         display: block;
     }
