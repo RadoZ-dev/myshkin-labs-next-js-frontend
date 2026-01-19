@@ -2,14 +2,14 @@
 
 .myshkin-labs-home {
     h1 {
-        font-size: 3.5rem;
-        margin-bottom: .75rem;
+        font-size: clamp(3.5rem, 10vw, 10rem);
+        margin-bottom: .3rem;
     }
 
     &__subtitle {
         font-weight: 700;
-        font-size: 1.2rem;
-        margin-bottom: 5rem;
+        font-size: clamp(1.2rem, 3vw, 2rem);
+        margin-bottom: 6rem;
         color: $color-royal-blue;
         text-shadow: 1px 1px 1px rgba($color-primary, .7);
         letter-spacing: 1px;
