@@ -17,7 +17,7 @@
     }
 
     &__hero {
-        background: url('../../img/bg-notebook3.jpg') no-repeat center center;
-        background-size: cover;
+        background: url('../../img/hero-background-imgs/lay-odds.png') bottom right -50px no-repeat, url('../../img/hero-background-imgs/sitting-on-the-top-of-the-world.png') no-repeat top left, url('../../img/bg-notebook3.jpg') repeat center center;
+        background-size: 375px auto, 180px auto, cover;
     }
 }

@@ -21,39 +21,39 @@
         &-content {
             display: flex;
             flex-direction: column;
+        }
 
-            a {
-                margin-bottom: .3rem;
-                font-size: 1.2rem;
-                font-weight: 600;
-                color: rgba($color-foreground, 0.7);
-                position: relative;
-                display: inline-block;
-                padding-bottom: 5px;
-                align-self: flex-start;
+        a {
+            margin-bottom: .3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: rgba($color-foreground, 0.7);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 5px;
+            align-self: flex-start;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -3px;
+                left: -3px;
+                width: calc(100% + 13px);
+                height: 1rem;
+                background: url('../../img/top-menu-items-underline-animation.png') no-repeat;
+                background-position: center center;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            &:hover {
+                color: $color-primary;
+                transition: color 0.3s ease;
 
                 &::after {
-                    content: '';
-                    position: absolute;
-                    bottom: -3px;
-                    left: -3px;
-                    width: calc(100% + 13px);
-                    height: 1rem;
-                    background: url('../../img/top-menu-items-underline-animation.png') no-repeat;
-                    background-position: center center;
-                    opacity: 0;
-                    transition: opacity 0.3s ease;
-                }
-
-                &:hover {
-                    color: $color-primary;
-                    transition: color 0.3s ease;
-
-                    &::after {
-                        opacity: .7;
-                        animation: sprite-underline 1.2s steps(25) infinite alternate;
-                        z-index: 0;
-                    }
+                    opacity: .7;
+                    animation: sprite-underline 1.2s steps(25) infinite alternate;
+                    z-index: 0;
                 }
             }
         }
