@@ -125,7 +125,7 @@ export default function Header() {
           opacity: 0
         },
         { 
-          height: 'auto',
+          height: 'calc(100vh - 80px)',
           opacity: 1,
           duration: 0.4,
           ease: "power2.out"
@@ -198,12 +198,12 @@ export default function Header() {
             </div>
 
             {/* Desktop Menu */}
-            <div className="myshkin-labs-header__top-menu hidden md:flex md:items-center md:space-x-8">
+            <div className="myshkin-labs-header__top-menu myshkin-labs-header__top-menu--desktop hidden lg:flex lg:items-center lg:space-x-8 lg:p-0 ">
               {menuItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
+                  className="text-gray-700 hover:text-gray-900 px-3 text-sm font-medium transition-colors"
                 >
                   {item.label}
                 </Link>
@@ -211,7 +211,7 @@ export default function Header() {
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="md:hidden">
+            <div className="lg:hidden">
               <button
                 onClick={toggleMenu}
                 type="button"
@@ -251,7 +251,7 @@ export default function Header() {
         {isMenuOpen && (
           <div 
             ref={menuPanelRef}
-            className="myshkin-labs-header__top-menu md:hidden absolute top-16 left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-40 overflow-hidden"
+            className="myshkin-labs-header__top-menu myshkin-labs-header__top-menu--mobile lg:hidden absolute top-16 left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-40 overflow-hidden"
             style={{ height: 0, opacity: 0 }}
           >
             <div 

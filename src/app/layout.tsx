@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "../assets/scss/main.scss";
 import "./globals.css";
+import "../assets/scss/main.scss";
 import Header from "@/components/Header";
 
 const myshkin = localFont({

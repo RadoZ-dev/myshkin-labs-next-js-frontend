@@ -4,6 +4,7 @@
     h1 {
         font-size: clamp(3.5rem, 10vw, 10rem);
         margin-bottom: .3rem;
+        text-shadow: 1px 1px 1px rgba($color-primary, .7);
     }
 
     &__subtitle {
