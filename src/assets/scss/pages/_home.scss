@@ -16,6 +16,19 @@
         text-align: center;
     }
 
+    &__latest-experiment {
+        font-size: clamp(2rem, 4vw, 4rem);
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        color: $color-primary;
+        font-family: $font-family-primary;
+        font-weight: 600;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
     &__hero {
         background: 
             url('../../img/hero-background-imgs/lay-odds.png') bottom right -50px no-repeat, 

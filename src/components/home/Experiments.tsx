@@ -19,9 +19,6 @@ export default async function Experiments() {
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
             Latest Experiments
           </h2>
-          <p className="text-gray-500 sm:text-xl dark:text-gray-400">
-            Explore our recent experiments in sound and code
-          </p>
         </div>
 
         {error ? (
