@@ -1,32 +1,18 @@
 "use client";
 
-import { Button } from "flowbite-react";
-import { useEffect, useState, useRef } from "react";
-import { getLatestPost, getPostTypeLabel, LatestPostNode } from "@/lib/wordpress";
+import { useEffect, useRef } from "react";
+import { getPostTypeLabel, LatestPostNode } from "@/lib/wordpress";
 import gsap from "gsap";
 
-export default function Hero() {
-  const [latestPost, setLatestPost] = useState<LatestPostNode | null>(null);
-  const [loading, setLoading] = useState(true);
+interface HeroProps {
+  latestPost: LatestPostNode | null;
+}
 
+export default function Hero({ latestPost }: HeroProps) {
   const h1Ref = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const expRef = useRef<HTMLParagraphElement>(null);
+  const expRef = useRef<HTMLDivElement>(null);
   const expLinkRef = useRef<HTMLAnchorElement>(null);
-
-  useEffect(() => {
-    async function fetchLatest() {
-      try {
-        const post = await getLatestPost();
-        setLatestPost(post);
-      } catch (error) {
-        console.error("Failed to fetch latest post:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchLatest();
-  }, []);
 
   useEffect(() => {
     gsap.fromTo(
@@ -43,14 +29,14 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
-    if (latestPost && !loading && expRef.current) {
+    if (latestPost && expRef.current) {
       gsap.fromTo(
         expRef.current,
         { opacity: 0 },
         { opacity: 1, duration: 0.6, delay: 0.5 }
       );
     }
-  }, [latestPost, loading]);
+  }, [latestPost]);
 
   const handleExpLinkHover = (isHovering: boolean) => {
     if (expLinkRef.current) {
@@ -80,7 +66,7 @@ export default function Hero() {
           Sound. Code. Experiments.
         </p>
 
-        {latestPost && !loading && (
+        {latestPost && (
           <div
             ref={expRef}
             className="myshkin-labs-home__latest-experiment-container"
