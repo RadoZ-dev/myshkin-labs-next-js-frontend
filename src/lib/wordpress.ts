@@ -37,6 +37,17 @@ async function fetchWP<T>(
   };
 }
 
+async function fetchWPList(
+  endpoint: string,
+  params?: Record<string, string>
+): Promise<{ data: WPRestPost[]; headers: Headers }> {
+  try {
+    return await fetchWP<WPRestPost[]>(endpoint, params);
+  } catch {
+    return { data: [], headers: new Headers() };
+  }
+}
+
 // Experiment Types
 export interface ExperimentNode {
   id: string;
@@ -58,12 +69,12 @@ function toExperimentNode(post: WPRestPost): ExperimentNode {
 }
 
 export async function getExperiments(): Promise<ExperimentNode[]> {
-  const { data } = await fetchWP<WPRestPost[]>('experiments', { per_page: '100' });
+  const { data } = await fetchWPList('experiments', { per_page: '100' });
   return data.map(toExperimentNode);
 }
 
 export async function getExperimentBySlug(slug: string): Promise<ExperimentNode | null> {
-  const { data } = await fetchWP<WPRestPost[]>('experiments', { slug });
+  const { data } = await fetchWPList('experiments', { slug });
   return data[0] ? toExperimentNode(data[0]) : null;
 }
 
@@ -73,7 +84,7 @@ export async function getExperimentByUri(uri: string): Promise<ExperimentNode | 
 }
 
 export async function getLatestExperiment(): Promise<ExperimentNode | null> {
-  const { data, headers } = await fetchWP<WPRestPost[]>('experiments', {
+  const { data, headers } = await fetchWPList('experiments', {
     per_page: '1',
     orderby: 'date',
     order: 'desc',
@@ -115,12 +126,12 @@ function toNoteNode(post: WPRestPost): NoteNode {
 }
 
 export async function getNotes(): Promise<NoteNode[]> {
-  const { data } = await fetchWP<WPRestPost[]>('notes', { per_page: '100' });
+  const { data } = await fetchWPList('notes', { per_page: '100' });
   return data.map(toNoteNode);
 }
 
 export async function getNoteBySlug(slug: string): Promise<NoteNode | null> {
-  const { data } = await fetchWP<WPRestPost[]>('notes', { slug });
+  const { data } = await fetchWPList('notes', { slug });
   return data[0] ? toNoteNode(data[0]) : null;
 }
 
@@ -155,12 +166,12 @@ function toReleaseNode(post: WPRestPost): ReleaseNode {
 }
 
 export async function getReleases(): Promise<ReleaseNode[]> {
-  const { data } = await fetchWP<WPRestPost[]>('releases', { per_page: '100' });
+  const { data } = await fetchWPList('releases', { per_page: '100' });
   return data.map(toReleaseNode);
 }
 
 export async function getReleaseBySlug(slug: string): Promise<ReleaseNode | null> {
-  const { data } = await fetchWP<WPRestPost[]>('releases', { slug });
+  const { data } = await fetchWPList('releases', { slug });
   return data[0] ? toReleaseNode(data[0]) : null;
 }
 
@@ -195,12 +206,12 @@ function toInstrumentNode(post: WPRestPost): InstrumentNode {
 }
 
 export async function getInstruments(): Promise<InstrumentNode[]> {
-  const { data } = await fetchWP<WPRestPost[]>('instruments', { per_page: '100' });
+  const { data } = await fetchWPList('instruments', { per_page: '100' });
   return data.map(toInstrumentNode);
 }
 
 export async function getInstrumentBySlug(slug: string): Promise<InstrumentNode | null> {
-  const { data } = await fetchWP<WPRestPost[]>('instruments', { slug });
+  const { data } = await fetchWPList('instruments', { slug });
   return data[0] ? toInstrumentNode(data[0]) : null;
 }
 
@@ -230,10 +241,10 @@ export async function getLatestPost(): Promise<LatestPostNode | null> {
   const params = { per_page: '1', orderby: 'date', order: 'desc' };
 
   const results = await Promise.allSettled([
-    fetchWP<WPRestPost[]>('experiments', params),
-    fetchWP<WPRestPost[]>('notes', params),
-    fetchWP<WPRestPost[]>('releases', params),
-    fetchWP<WPRestPost[]>('instruments', params),
+    fetchWPList('experiments', params),
+    fetchWPList('notes', params),
+    fetchWPList('releases', params),
+    fetchWPList('instruments', params),
   ]);
 
   const candidates: LatestPostNode[] = [];
