@@ -42,8 +42,11 @@ async function fetchWPList(
   params?: Record<string, string>
 ): Promise<{ data: WPRestPost[]; headers: Headers }> {
   try {
-    return await fetchWP<WPRestPost[]>(endpoint, params);
-  } catch {
+    const result = await fetchWP<WPRestPost[]>(endpoint, params);
+    console.log(`[WP] ${endpoint}: ${result.data.length} posts`);
+    return result;
+  } catch (error) {
+    console.error(`[WP] ${endpoint} failed:`, error instanceof Error ? error.message : error);
     return { data: [], headers: new Headers() };
   }
 }
