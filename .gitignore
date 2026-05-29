@@ -43,3 +43,7 @@ next-env.d.ts
 # IDE
 .vscode/
 .idea/
+
+# Claude
+CLAUDE.md
+PLAN.md
