@@ -1,46 +1,60 @@
-@use '../abstracts/variables' as *;
+@use "../abstracts/variables" as *;
 
 .myshkin-labs-home {
-    h1 {
-        font-size: clamp(3.5rem, 10vw, 10rem);
-        margin-bottom: .3rem;
-        text-shadow: 1px 1px 1px rgba($color-primary, .7);
+  h1 {
+    font-size: clamp(3.5rem, 10vw, 10rem);
+    margin-bottom: 0.3rem;
+    text-shadow: 3px 3px 4px rgba($color-primary, 0.5);
+  }
+
+  &__subtitle {
+    font-weight: 700;
+    font-size: clamp(1.2rem, 3vw, 2.5rem);
+    margin-bottom: 6rem;
+    color: $color-neon-blue;
+    text-shadow: 2px 2px 3px rgba($color-neon-blue, 0.5);
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  &__read-more {
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+
+  &__latest-experiment {
+    font-size: clamp(2rem, 4vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: $color-primary;
+    font-family: $font-family-primary;
+    font-weight: 600;
+
+    &:hover {
+      cursor: pointer;
     }
+  }
 
-    &__subtitle {
-        font-weight: 700;
-        font-size: clamp(1.2rem, 3vw, 2.5rem);
-        margin-bottom: 6rem;
-        color: $color-royal-blue;
-        letter-spacing: 1px;
-        text-align: center;
+  &__hero {
+    background:
+      url("../../img/maya/star-maya-03-white.png") no-repeat top 20px right 20px,
+      url("../../img/maya/star-maya-02-white.png") no-repeat top left,
+      url("../../img/maya/star-maya-01-white.png") no-repeat bottom 120px left
+        20px,
+      url("../../img/maya/house-white.png") no-repeat bottom right 10px;
+    background-size:
+      120px auto,
+      100px auto,
+      15% auto,
+      30% auto;
+
+    @media (min-width: 768px) {
+      background-size:
+        175px auto,
+        180px auto,
+        15% auto,
+        20% auto;
     }
-
-    &__latest-experiment {
-        font-size: clamp(2rem, 4vw, 4rem);
-        line-height: 1.1;
-        margin-bottom: 1.5rem;
-        color: $color-primary;
-        font-family: $font-family-primary;
-        font-weight: 600;
-
-        &:hover {
-            cursor: pointer;
-        }
-    }
-
-    &__hero {
-        background: 
-            url('../../img/hero-background-imgs/lay-odds.png') bottom right -50px no-repeat, 
-            url('../../img/hero-background-imgs/sitting-on-the-top-of-the-world.png') no-repeat top left,
-            url('../../img/maya/star-maya-03.png') no-repeat top 20px right 20px,
-            url('../../img/maya/star-maya-02.png') no-repeat top -20px center,
-            url('../../img/maya/star-maya-01.png') no-repeat bottom 120px left 20px, 
-            url('../../img/bg-notebook3.jpg') repeat center center;
-        background-size: 375px auto, 180px auto, 15% auto, 20% auto, 15% auto, cover;
-
-        @media (min-width: 1024px) { 
-            background-size: 500px auto, 250px auto, 10% auto, 15% auto, 10% auto, cover;
-        }
-    }
+  }
 }
