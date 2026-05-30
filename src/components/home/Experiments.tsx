@@ -32,13 +32,10 @@ export default async function Experiments() {
         ) : (
           <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
             {experiments.map((experiment) => (
-              <article
-                key={experiment.id}
-                className="p-6 dark:bg-gray-800 dark:border-gray-700"
-              >
+              <article key={experiment.id} className="p-6">
                 <h3 className="text-xl font-semibold">{experiment.title}</h3>
                 <div
-                  className="mb-4 dark:text-gray-400"
+                  className="mb-4"
                   dangerouslySetInnerHTML={{ __html: experiment.excerpt }}
                 />
                 <Link
