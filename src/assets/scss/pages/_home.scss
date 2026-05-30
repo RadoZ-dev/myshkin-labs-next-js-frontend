@@ -34,6 +34,10 @@
     &:hover {
       cursor: pointer;
     }
+
+    &-label {
+      text-shadow: 2px 2px 3px rgba($color-primary, 0.5);
+    }
   }
 
   &__hero {

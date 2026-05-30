@@ -85,7 +85,7 @@ export default function Hero({ latestPost }: HeroProps) {
             </a>
             <a
               href={latestPost.uri}
-              className="myshkin-labs-home__read-more mt-6 inline-block  px-8 py-4 text-base font-mono bg-white text-black rounded-full hover:bg-gray-100 transition-colors"
+              className="myshkin-labs-home__read-more button mt-6 inline-block  px-8 py-4 text-base font-mono bg-white text-black rounded-full hover:bg-gray-100 transition-colors"
             >
               Read more →
             </a>

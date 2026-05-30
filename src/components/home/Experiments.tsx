@@ -13,10 +13,10 @@ export default async function Experiments() {
   }
 
   return (
-    <section className="experiments-section bg-white dark:bg-gray-900 py-16">
+    <section className="experiments-section dark:bg-gray-900 py-16">
       <div className="container mx-auto px-4 max-w-screen-xl">
         <div className="mb-8 lg:mb-16">
-          <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+          <h2 className="mb-4 text-4xl tracking-tight font-extrabold dark:text-white">
             Latest Experiments
           </h2>
         </div>
@@ -34,15 +34,16 @@ export default async function Experiments() {
             {experiments.map((experiment) => (
               <article
                 key={experiment.id}
-                className="p-6 bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700"
+                className="p-6 dark:bg-gray-800 dark:border-gray-700"
               >
+                <h3 className="text-xl font-semibold">{experiment.title}</h3>
                 <div
-                  className="mb-4 text-gray-500 dark:text-gray-400"
+                  className="mb-4 dark:text-gray-400"
                   dangerouslySetInnerHTML={{ __html: experiment.excerpt }}
                 />
                 <Link
                   href={experiment.uri}
-                  className="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  className="inline-flex items-center font-medium dark:text-blue-500 hover:underline"
                 >
                   View Experiment
                   <svg

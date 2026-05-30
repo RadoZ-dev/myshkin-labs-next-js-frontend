@@ -1,4 +1,4 @@
-@use '../abstracts/variables' as *;
+@use "../abstracts/variables" as *;
 
 body {
   background: $color-background;
@@ -7,4 +7,8 @@ body {
 
 .focus\:ring-2:focus {
   --tw-ring-shadow: none;
+}
+
+main {
+  padding: 1rem;
 }

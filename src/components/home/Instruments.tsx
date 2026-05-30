@@ -8,7 +8,8 @@ export default async function Instruments() {
   try {
     instruments = await getInstruments();
   } catch (err) {
-    errorMessage = err instanceof Error ? err.message : "Failed to load instruments";
+    errorMessage =
+      err instanceof Error ? err.message : "Failed to load instruments";
     console.error("Error loading instruments:", errorMessage);
   }
 
@@ -22,7 +23,7 @@ export default async function Instruments() {
 
   if (!instruments || instruments.length === 0) {
     return (
-      <div className="text-gray-500">
+      <div>
         <p>No instruments available</p>
       </div>
     );
@@ -30,12 +31,14 @@ export default async function Instruments() {
 
   return (
     <div className="myshkin-labs-instruments">
-      <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Instruments</h2>
+      <h2 className="mb-4 text-4xl tracking-tight font-extrabold">
+        Instruments
+      </h2>
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {instruments.map((instrument) => (
           <article
             key={instrument.id}
-            className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow"
+            className="p-6 rounded-lg hover:shadow-lg transition-shadow"
           >
             <div className="flex justify-between items-start mb-3">
               <h3 className="text-xl font-semibold">{instrument.title}</h3>
@@ -46,20 +49,16 @@ export default async function Instruments() {
               )}
             </div>
             {instrument.instrumentMeta?.stack && (
-              <p className="text-sm text-gray-500 mb-1">
-                {instrument.instrumentMeta.stack}
-              </p>
+              <p className="text-sm mb-1">{instrument.instrumentMeta.stack}</p>
             )}
             {instrument.instrumentMeta?.role && (
-              <p className="text-sm text-gray-400 mb-4">
-                {instrument.instrumentMeta.role}
-              </p>
+              <p className="text-sm mb-4">{instrument.instrumentMeta.role}</p>
             )}
             <div
-              className="text-gray-600 mb-4 line-clamp-3"
+              className="mb-4 line-clamp-3"
               dangerouslySetInnerHTML={{ __html: instrument.content }}
             />
-            <Link href={instrument.uri} className="text-blue-500 hover:underline">
+            <Link href={instrument.uri} className="hover:underline">
               View →
             </Link>
           </article>
