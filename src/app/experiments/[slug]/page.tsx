@@ -36,20 +36,17 @@ export default async function ExperimentPage({ params }: ExperimentPageProps) {
   }
 
   return (
-    <article className="min-h-screen">
+    <article className="max-w-7xl px-4 py-4" style={{ margin: "0px auto" }}>
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <Link href="/experiments" className="text-blue-500 hover:underline mb-6 inline-block">
+        <Link
+          href="/experiments"
+          className="text-blue-500 hover:underline mb-6 inline-block"
+        >
           ← Back to experiments
         </Link>
 
         <header className="mb-8">
           <h1 className="text-4xl font-bold mb-4">{experiment.title}</h1>
-          {experiment.excerpt && (
-            <div
-              className="text-lg text-gray-600"
-              dangerouslySetInnerHTML={{ __html: experiment.excerpt }}
-            />
-          )}
         </header>
 
         <div

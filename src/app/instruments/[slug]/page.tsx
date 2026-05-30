@@ -36,9 +36,12 @@ export default async function InstrumentPage({ params }: InstrumentPageProps) {
   }
 
   return (
-    <article className="min-h-screen">
+    <article className="max-w-7xl px-4 py-4" style={{ margin: "0px auto" }}>
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <Link href="/instruments" className="text-blue-500 hover:underline mb-6 inline-block">
+        <Link
+          href="/instruments"
+          className="text-blue-500 hover:underline mb-6 inline-block"
+        >
           ← Back to instruments
         </Link>
 
@@ -46,7 +49,9 @@ export default async function InstrumentPage({ params }: InstrumentPageProps) {
           <h1 className="text-4xl font-bold mb-4">{instrument.title}</h1>
           <div className="flex flex-wrap gap-4 text-sm text-gray-500">
             {instrument.instrumentMeta?.type && (
-              <span className="capitalize">{instrument.instrumentMeta.type}</span>
+              <span className="capitalize">
+                {instrument.instrumentMeta.type}
+              </span>
             )}
             {instrument.instrumentMeta?.stack && (
               <span>{instrument.instrumentMeta.stack}</span>

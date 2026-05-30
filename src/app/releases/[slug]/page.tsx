@@ -36,9 +36,12 @@ export default async function ReleasePage({ params }: ReleasePageProps) {
   }
 
   return (
-    <article className="min-h-screen">
+    <article className="max-w-7xl px-4 py-4" style={{ margin: "0px auto" }}>
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <Link href="/releases" className="text-blue-500 hover:underline mb-6 inline-block">
+        <Link
+          href="/releases"
+          className="text-blue-500 hover:underline mb-6 inline-block"
+        >
           ← Back to releases
         </Link>
 
@@ -50,7 +53,8 @@ export default async function ReleasePage({ params }: ReleasePageProps) {
             )}
             {release.releaseMeta?.releaseDate && (
               <span>
-                Date: {new Date(release.releaseMeta.releaseDate).toLocaleDateString()}
+                Date:{" "}
+                {new Date(release.releaseMeta.releaseDate).toLocaleDateString()}
               </span>
             )}
           </div>
