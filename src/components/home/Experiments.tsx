@@ -13,7 +13,7 @@ export default async function Experiments() {
   }
 
   return (
-    <section className="experiments-section dark:bg-gray-900 py-16">
+    <section className="experiments-section py-16">
       <div className="container mx-auto px-4 max-w-screen-xl">
         <div className="mb-8 lg:mb-16">
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold dark:text-white">
