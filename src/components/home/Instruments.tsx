@@ -15,22 +15,24 @@ export default async function Instruments() {
 
   if (errorMessage) {
     return (
-      <div className="text-red-500">
-        <p>Error loading instruments: {errorMessage}</p>
-      </div>
+      <section className="myshkin-labs-instruments">
+        <p className="text-red-500">
+          Error loading instruments: {errorMessage}
+        </p>
+      </section>
     );
   }
 
   if (!instruments || instruments.length === 0) {
     return (
-      <div>
+      <section className="myshkin-labs-instruments">
         <p>No instruments available</p>
-      </div>
+      </section>
     );
   }
 
   return (
-    <div className="myshkin-labs-instruments">
+    <section className="myshkin-labs-instruments">
       <h2 className="mb-4 text-4xl tracking-tight font-extrabold">
         Instruments
       </h2>
@@ -64,6 +66,6 @@ export default async function Instruments() {
           </article>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

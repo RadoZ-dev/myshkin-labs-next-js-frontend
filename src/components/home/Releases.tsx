@@ -15,22 +15,22 @@ export default async function Releases() {
 
   if (errorMessage) {
     return (
-      <div className="text-red-500">
-        <p>Error loading releases: {errorMessage}</p>
-      </div>
+      <section className="myshkin-labs-releases">
+        <p className="text-red-500">Error loading releases: {errorMessage}</p>
+      </section>
     );
   }
 
   if (!releases || releases.length === 0) {
     return (
-      <div className="">
+      <section className="myshkin-labs-releases">
         <p>No releases available</p>
-      </div>
+      </section>
     );
   }
 
   return (
-    <div className="myshkin-labs-releases">
+    <section className="myshkin-labs-releases">
       <h2 className="mb-4 text-4xl tracking-tight font-extrabold dark:text-white">
         Releases
       </h2>
@@ -75,6 +75,6 @@ export default async function Releases() {
           </article>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

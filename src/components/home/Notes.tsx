@@ -14,22 +14,22 @@ export default async function Notes() {
 
   if (errorMessage) {
     return (
-      <div className="text-red-500">
-        <p>Error loading notes: {errorMessage}</p>
-      </div>
+      <section className="myshkin-labs-notes">
+        <p className="text-red-500">Error loading notes: {errorMessage}</p>
+      </section>
     );
   }
 
   if (!notes || notes.length === 0) {
     return (
-      <div>
+      <section className="myshkin-labs-notes">
         <p>No notes available</p>
-      </div>
+      </section>
     );
   }
 
   return (
-    <div className="myshkin-labs-notes">
+    <section className="myshkin-labs-notes">
       <h2 className="mb-4 text-4xl tracking-tight font-extrabold">Notes</h2>
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {notes.map((note) => (
@@ -55,6 +55,6 @@ export default async function Notes() {
           </article>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

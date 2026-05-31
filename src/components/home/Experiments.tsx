@@ -17,14 +17,14 @@ export default async function Experiments() {
       <div className="container mx-auto px-4 max-w-screen-xl">
         <div className="mb-8 lg:mb-16">
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold dark:text-white">
-            Latest Experiments
+            Experiments
           </h2>
         </div>
 
         {error ? (
-          <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
-            {error}
-          </div>
+          <section className="myshkin-labs-experiments">
+            <p className="text-red-500">Error loading experiments: {error}</p>
+          </section>
         ) : experiments.length === 0 ? (
           <p className="text-gray-500 dark:text-gray-400">
             No experiments found yet.
