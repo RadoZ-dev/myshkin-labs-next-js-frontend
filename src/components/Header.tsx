@@ -276,7 +276,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 className="block px-3 py-2 rounded-md text-base font-medium transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={toggleMenu}
               >
                 {item.label}
               </Link>
