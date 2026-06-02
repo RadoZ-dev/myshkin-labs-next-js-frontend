@@ -82,6 +82,12 @@
       &.active {
         color: $color-royal-blue;
         font-weight: 900;
+
+        &::after {
+          opacity: 0.7;
+          animation: sprite-underline 1.2s steps(25) infinite alternate;
+          z-index: 0;
+        }
       }
     }
   }
