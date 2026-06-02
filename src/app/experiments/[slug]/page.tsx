@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: ExperimentPageProps) {
 
   return {
     title: `${experiment.title} | MИШKiN LAБS`,
-    description: experiment.excerpt.replace(/<[^>]+>/g, "").substring(0, 160),
+    description: experiment.content.replace(/<[^>]+>/g, "").substring(0, 160),
   };
 }
 
@@ -37,7 +37,7 @@ export default async function ExperimentPage({ params }: ExperimentPageProps) {
 
   return (
     <article className="max-w-7xl px-4 py-4" style={{ margin: "0px auto" }}>
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="container max-w-4xl mx-auto px-4 py-12">
         <Link
           href="/experiments"
           className="text-blue-500 hover:underline mb-6 inline-block"

@@ -37,7 +37,7 @@ export default async function NotePage({ params }: NotePageProps) {
 
   return (
     <article className="max-w-7xl px-4 py-4" style={{ margin: "0px auto" }}>
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="container max-w-4xl mx-auto px-4 py-12">
         <Link
           href="/notes"
           className="text-blue-500 hover:underline mb-6 inline-block"

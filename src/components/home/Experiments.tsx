@@ -1,65 +1,59 @@
-import { getExperiments, ExperimentNode } from "@/lib/wordpress";
+import { getExperiments } from "@/lib/wordpress";
 import Link from "next/link";
 
 export default async function Experiments() {
-  let experiments: ExperimentNode[] = [];
-  let error: string | null = null;
+  let experiments = null;
+  let errorMessage = null;
 
   try {
     experiments = await getExperiments();
   } catch (err) {
-    error = err instanceof Error ? err.message : "Failed to load experiments";
-    console.error("Error fetching experiments:", err);
+    errorMessage =
+      err instanceof Error ? err.message : "Failed to load experiments";
+    console.error("Error loading experiments:", errorMessage);
+  }
+
+  if (errorMessage) {
+    return (
+      <section className="myshkin-labs-experiments">
+        <p className="text-red-500">
+          Error loading experiments: {errorMessage}
+        </p>
+      </section>
+    );
+  }
+
+  if (!experiments || experiments.length === 0) {
+    return (
+      <section className="myshkin-labs-experiments">
+        <p>No experiments available</p>
+      </section>
+    );
   }
 
   return (
-    <section className="experiments-section py-16">
-      <div className="container mx-auto px-4 max-w-screen-xl">
-        <div className="mb-8 lg:mb-16">
-          <h2 className="mb-4 text-4xl tracking-tight font-extrabold dark:text-white">
-            Experiments
-          </h2>
-        </div>
-
-        {error ? (
-          <section className="myshkin-labs-experiments">
-            <p className="text-red-500">Error loading experiments: {error}</p>
-          </section>
-        ) : experiments.length === 0 ? (
-          <p className="text-gray-500 dark:text-gray-400">
-            No experiments found yet.
-          </p>
-        ) : (
-          <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
-            {experiments.map((experiment) => (
-              <article key={experiment.id} className="p-6">
-                <h3 className="text-xl font-semibold">{experiment.title}</h3>
-                <div
-                  className="mb-4"
-                  dangerouslySetInnerHTML={{ __html: experiment.excerpt }}
-                />
-                <Link
-                  href={experiment.uri}
-                  className="inline-flex items-center font-medium dark:text-blue-500 hover:underline"
-                >
-                  View Experiment
-                  <svg
-                    className="ml-2 w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </Link>
-              </article>
-            ))}
-          </div>
-        )}
+    <section className="myshkin-labs-experiments">
+      <h2 className="mb-4 text-4xl tracking-tight font-extrabold">
+        Experiments
+      </h2>
+      <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {experiments.map((experiment) => (
+          <article
+            key={experiment.id}
+            className="p-6 rounded-lg hover:shadow-lg transition-shadow"
+          >
+            <div className="flex justify-between items-start mb-3">
+              <h3 className="text-xl font-semibold">{experiment.title}</h3>
+            </div>
+            <div
+              className="mb-4 line-clamp-3"
+              dangerouslySetInnerHTML={{ __html: experiment.content }}
+            />
+            <Link href={experiment.uri} className="hover:underline">
+              View Experiment →
+            </Link>
+          </article>
+        ))}
       </div>
     </section>
   );
