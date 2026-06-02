@@ -9,10 +9,14 @@ body {
   --tw-ring-shadow: none;
 }
 
-main {
-  padding: 1rem;
-}
-
 section {
   margin-bottom: 2.5rem;
+}
+
+main {
+  border-bottom: 2px solid $color-green;
+}
+
+.container {
+  padding: 0 1rem;
 }

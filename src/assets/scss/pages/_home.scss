@@ -1,6 +1,8 @@
 @use "../abstracts/variables" as *;
 
 .myshkin-labs-home {
+  padding: 1rem;
+
   h1 {
     font-size: clamp(3.5rem, 10vw, 10rem);
     margin-bottom: 0.3rem;
