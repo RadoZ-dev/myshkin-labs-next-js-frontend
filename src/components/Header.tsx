@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import catImage from "@/assets/img/cat.png";
 import gsap from "gsap";
@@ -14,6 +15,7 @@ if (typeof window !== "undefined") {
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
   const svgRef = useRef<SVGSVGElement>(null);
   const path1Ref = useRef<SVGPathElement>(null);
   const path2Ref = useRef<SVGPathElement>(null);
@@ -214,7 +216,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-700 hover:text-gray-900 px-3 text-sm font-medium transition-colors"
+                className={`text-gray-700 hover:text-gray-900 px-3 text-sm font-medium transition-colors${pathname === item.href ? " active" : ""}`}
               >
                 {item.label}
               </Link>
@@ -275,7 +277,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="block px-3 py-2 rounded-md text-base font-medium transition-colors"
+                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors${pathname === item.href ? " active" : ""}`}
                 onClick={toggleMenu}
               >
                 {item.label}

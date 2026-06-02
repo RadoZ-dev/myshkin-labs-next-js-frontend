@@ -78,6 +78,11 @@
           z-index: 0;
         }
       }
+
+      &.active {
+        color: $color-royal-blue;
+        font-weight: 900;
+      }
     }
   }
 
