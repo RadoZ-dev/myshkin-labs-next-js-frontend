@@ -17,6 +17,10 @@
     text-shadow: 2px 2px 3px rgba($color-neon-blue, 0.5);
     letter-spacing: 1px;
     text-align: center;
+
+    @media (max-width: 1023px) and (orientation: landscape) {
+      margin-bottom: 1rem;
+    }
   }
 
   &__read-more {
@@ -52,17 +56,33 @@
         20px,
       url("../../img/maya/house-white.png") no-repeat bottom right 10px;
     background-size:
-      120px auto,
-      100px auto,
+      30% auto,
+      25% auto,
       15% auto,
       30% auto;
 
     @media (min-width: 768px) {
       background-size:
-        175px auto,
-        180px auto,
+        18% auto,
+        22% auto,
+        12% auto,
+        18% auto;
+    }
+
+    @media (max-width: 1023px) and (orientation: landscape) {
+      display: block;
+      background:
+        url("../../img/maya/star-maya-03-white.png") no-repeat top 10px right
+          20px,
+        url("../../img/maya/star-maya-02-white.png") no-repeat top left,
+        url("../../img/maya/star-maya-01-white.png") no-repeat bottom 20px left
+          20px,
+        url("../../img/maya/house-white.png") no-repeat bottom 20px right 10px;
+      background-size:
+        10% auto,
         15% auto,
-        20% auto;
+        10% auto,
+        18% auto;
     }
   }
 }
