@@ -50,11 +50,14 @@
     margin-bottom: 4rem;
 
     background:
-      url("../../img/maya/star-maya-03-white.png") no-repeat top 20px right 20px,
-      url("../../img/maya/star-maya-02-white.png") no-repeat top left,
-      url("../../img/maya/star-maya-01-white.png") no-repeat bottom 120px left
-        20px,
-      url("../../img/maya/house-white.png") no-repeat bottom right 10px;
+      url("../../img/maya/star-maya-03-white-transparent.png") no-repeat top
+        20px right 20px,
+      url("../../img/maya/star-maya-02-white-transparent.png") no-repeat top
+        left,
+      url("../../img/maya/star-maya-01-white-transparent.png") no-repeat bottom
+        120px left 20px,
+      url("../../img/maya/house-white-transparent.png") no-repeat bottom right
+        10px;
     background-size:
       30% auto,
       25% auto,
@@ -72,12 +75,14 @@
     @media (max-width: 1023px) and (orientation: landscape) {
       display: block;
       background:
-        url("../../img/maya/star-maya-03-white.png") no-repeat top 10px right
-          20px,
-        url("../../img/maya/star-maya-02-white.png") no-repeat top left,
-        url("../../img/maya/star-maya-01-white.png") no-repeat bottom 20px left
-          20px,
-        url("../../img/maya/house-white.png") no-repeat bottom 20px right 10px;
+        url("../../img/maya/star-maya-03-white-transparent.png") no-repeat top
+          10px right 20px,
+        url("../../img/maya/star-maya-02-white-transparent.png") no-repeat top
+          left,
+        url("../../img/maya/star-maya-01-white-transparent.png") no-repeat
+          bottom 20px left 20px,
+        url("../../img/maya/house-white-transparent.png") no-repeat bottom 20px
+          right 10px;
       background-size:
         10% auto,
         15% auto,
