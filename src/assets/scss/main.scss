@@ -4,27 +4,30 @@
 // -----------------------------------------------------------------------------
 
 // 1. Abstracts
-@use 'abstracts/variables';
-@use 'abstracts/functions';
-@use 'abstracts/mixins';
+@use "abstracts/variables";
+@use "abstracts/functions";
+@use "abstracts/mixins";
 
 // 2. Vendors
-@use 'vendors/vendors';
+@use "vendors/vendors";
 
 // 3. Base
-@use 'base/reset';
-@use 'base/typography';
-@use 'base/base';
+@use "base/reset";
+@use "base/typography";
+@use "base/base";
 
 // 4. Layout
-@use 'layout/header';
-@use 'layout/footer';
+@use "layout/header";
+@use "layout/footer";
 
 // 5. Components
-@use 'components/buttons';
+@use "components/buttons";
+@use "components/tool-polypulse";
+@use "components/tool-melodic-shapes";
 
 // 6. Pages
-@use 'pages/home';
+@use "pages/home";
+@use "pages/tools";
 
 // 7. Themes
-@use 'themes/default';
+@use "themes/default";

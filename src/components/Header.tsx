@@ -190,11 +190,11 @@ export default function Header() {
 
   const menuItems = [
     { label: "Home", href: "/" },
-    { label: "Experiments", href: "/experiments" },
-    { label: "Notes", href: "/notes" },
-    { label: "Instruments", href: "/instruments" },
+    // { label: "Experiments", href: "/experiments" },
+    // { label: "Notes", href: "/notes" },
+    // { label: "Instruments", href: "/instruments" },
     { label: "Releases", href: "/releases" },
-    { label: "Signal", href: "/signal" },
+    { label: "Tools", href: "/tools" },
   ];
 
   return (
