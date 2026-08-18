@@ -48,7 +48,7 @@ export default async function NotePage({ params }: NotePageProps) {
         <header className="mb-8">
           <h1 className="text-4xl font-bold mb-4">{note.title}</h1>
           {note.noteMeta?.mood && (
-            <p className="text-sm text-gray-500">Mood: {note.noteMeta.mood}</p>
+            <p className="text-sm">Mood: {note.noteMeta.mood}</p>
           )}
         </header>
 

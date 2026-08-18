@@ -33,4 +33,8 @@ h3 {
 
 p {
   margin-bottom: 1rem;
+  // Single source of truth for body copy. Components may override for a
+  // deliberate accent (e.g. the neon hero subtitle), but the default is white
+  // everywhere so paragraphs stay consistent and readable on the dark ground.
+  color: $color-foreground;
 }
