@@ -14,7 +14,21 @@ section {
 }
 
 main {
-  border-bottom: 2px solid $color-green;
+  position: relative;
+  // Hand-drawn green line instead of a flat 2px rule
+  padding-bottom: 1.25rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 24px;
+    background: url("../../img/green-border-transparent.png") repeat-x center /
+      auto 100%;
+    pointer-events: none;
+  }
 }
 
 .container {
