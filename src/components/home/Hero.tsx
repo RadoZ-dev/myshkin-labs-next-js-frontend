@@ -79,7 +79,7 @@ export default function Hero({}: HeroProps) {
           <Link
             ref={expLinkRef}
             href="/tools"
-            className="myshkin-labs-home__latest-experiment mt-6 text-sm font-mono block"
+            className="myshkin-labs-home__latest-experiment mt-6 text-sm block"
             onMouseEnter={() => handleExpLinkHover(true)}
             onMouseLeave={() => handleExpLinkHover(false)}
           >
@@ -87,7 +87,7 @@ export default function Hero({}: HeroProps) {
           </Link>
           <Link
             href="/tools"
-            className="myshkin-labs-home__read-more button mt-6 inline-block  px-8 py-4 text-base font-mono bg-white text-black rounded-full hover:bg-gray-100 transition-colors"
+            className="myshkin-labs-home__read-more button mt-6 inline-block  px-8 py-4 text-base bg-white text-black rounded-full hover:bg-gray-100 transition-colors"
           >
             Open tools →
           </Link>
