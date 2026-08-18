@@ -13,17 +13,26 @@ section {
   margin-bottom: 2.5rem;
 }
 
-main {
+// Hand-drawn green line closing off the page content. Archive and index pages
+// use <main>; the singular post pages use a top-level <article>.
+//
+// The listing components also render an <article> per item, so the article
+// selector is limited to ones that are not inside a <main> — otherwise every
+// card on /releases would draw its own line.
+main,
+article:not(main article) {
   position: relative;
-  // Hand-drawn green line instead of a flat 2px rule
   padding-bottom: 1.25rem;
 
   &::after {
     content: "";
     position: absolute;
     bottom: 0;
-    left: 0;
-    right: 0;
+    // Inset so the line keeps a gutter on pages where the element reaches the
+    // viewport edge; on the home page it already sits inside
+    // .myshkin-labs-home's padding, so this matches that look everywhere.
+    left: 1rem;
+    right: 1rem;
     height: 24px;
     background: url("../../img/green-border-transparent.png") repeat-x center /
       auto 100%;
