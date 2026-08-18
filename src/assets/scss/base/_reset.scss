@@ -2,8 +2,32 @@
 // This file contains basic resets and normalize styles.
 // -----------------------------------------------------------------------------
 
+// NOTE: this stylesheet is unlayered, while Tailwind's utilities live in
+// `@layer utilities`. Unlayered CSS beats layered CSS regardless of
+// specificity, so a blanket `* { padding: 0 }` here silently overrides every
+// px-*/py-* utility in the app. Reset the box model only, and let elements
+// that need zeroed spacing say so themselves.
 * {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ul,
+ol {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
