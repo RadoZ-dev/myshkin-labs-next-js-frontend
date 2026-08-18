@@ -1,0 +1,122 @@
+@use "../abstracts/variables" as *;
+
+// -----------------------------------------------------------------------------
+// Melodic Shapes — phrase generator + notation (/tools/melodic-shapes)
+// Shared chrome (panels, sliders, buttons) lives in pages/_tools.scss
+// -----------------------------------------------------------------------------
+
+.myshkin-labs-melodic-shapes {
+  // Vertical rhythm for the whole tool. Owning it here keeps the spacing
+  // consistent instead of scattering mb-* utilities through the JSX.
+  display: flex;
+  flex-direction: column;
+
+  .myshkin-labs-tool__intro {
+    margin-bottom: 2.5rem;
+  }
+
+  &__controls {
+    margin-bottom: 1.75rem;
+  }
+
+  &__options {
+    padding-bottom: 2.5rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid rgba($color-primary, 0.08);
+  }
+
+  // --- Contour graph ----------------------------------------------------------
+
+  &__graph {
+    width: 100%;
+    max-width: 48rem;
+    height: 180px;
+    margin: 1rem 0;
+    display: block;
+    animation: melodic-shapes-graph-in 0.4s ease-out both;
+  }
+
+  &__graph-grid {
+    stroke: rgba($color-primary, 0.15);
+    stroke-width: 1;
+    // preserveAspectRatio="none" stretches the viewBox, which would also
+    // scale stroke widths unevenly
+    vector-effect: non-scaling-stroke;
+  }
+
+  &__graph-line {
+    fill: none;
+    stroke: $color-neon-blue;
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+  }
+
+  &__graph-dot {
+    fill: $color-neon-blue;
+    stroke: none;
+    transition:
+      fill 0.15s ease,
+      r 0.15s ease;
+
+    // First dot is the root of the phrase
+    &[data-root] {
+      fill: $color-purple;
+    }
+
+    &[data-active] {
+      fill: $color-green;
+      stroke: $color-green;
+      stroke-width: 2;
+      vector-effect: non-scaling-stroke;
+    }
+  }
+
+  // --- Notation ---------------------------------------------------------------
+
+  &__notation {
+    animation: melodic-shapes-notation-in 0.4s ease-out both;
+  }
+
+  // VexFlow engraves in black. Rather than recolouring the glyphs onto a dark
+  // background, give the staff its own sheet of paper — it reads as notation
+  // and keeps the neon identity via the rim glow.
+  &__notation-paper {
+    background: $color-foreground;
+    border-radius: 0.5rem;
+    padding: 1.5rem 1.75rem;
+    box-shadow: 0 0 24px rgba($color-neon-blue, 0.25);
+  }
+
+  // Low specificity on purpose: MusicNotation sets inline fill/stroke on the
+  // active note, and inline styles must keep winning over this rule.
+  &__notation .vexflow-container svg {
+    --vf-color: #{$color-background};
+    color: var(--vf-color);
+    fill: var(--vf-color);
+    stroke: var(--vf-color);
+  }
+}
+
+@keyframes melodic-shapes-graph-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes melodic-shapes-notation-in {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
