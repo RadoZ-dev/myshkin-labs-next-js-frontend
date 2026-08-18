@@ -216,7 +216,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-gray-700 hover:text-gray-900 px-3 text-sm font-medium transition-colors${pathname === item.href ? " active" : ""}`}
+                className={`text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors${pathname === item.href ? " active" : ""}`}
               >
                 {item.label}
               </Link>
@@ -271,13 +271,13 @@ export default function Header() {
         >
           <div
             ref={menuItemsRef}
-            className="myshkin-labs-header__top-menu-content px-2 pt-2 pb-3 space-y-1 sm:px-3"
+            className="myshkin-labs-header__top-menu-content pt-2 pb-3 space-y-1"
           >
             {menuItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors${pathname === item.href ? " active" : ""}`}
+                className={`block py-2 rounded-md text-base font-medium transition-colors${pathname === item.href ? " active" : ""}`}
                 onClick={toggleMenu}
               >
                 {item.label}
