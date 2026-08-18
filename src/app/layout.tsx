@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import "../assets/scss/main.scss";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const myshkin = localFont({
   src: "../assets/fonts/Myshkin2-Regular.woff2",
@@ -32,6 +33,7 @@ export default function RootLayout({
       >
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
