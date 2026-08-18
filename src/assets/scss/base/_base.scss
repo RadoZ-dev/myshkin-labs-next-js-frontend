@@ -28,11 +28,10 @@ article:not(main article) {
     content: "";
     position: absolute;
     bottom: 0;
-    // Flush with the element's own box: every page already gives <main> /
-    // <article> a px-4 gutter, so an extra inset here would just stack on top
-    // of it — and stack twice on the home page, which adds its own padding.
-    left: 0;
-    right: 0;
+    // Inset to match the px-4 gutter on <main> / <article>, so the line starts
+    // and ends level with the page content rather than spanning the padding.
+    left: 1rem;
+    right: 1rem;
     height: 24px;
     background: url("../../img/green-border-transparent.png") repeat-x center /
       auto 100%;
