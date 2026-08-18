@@ -55,7 +55,7 @@ export default function Hero({}: HeroProps) {
   };
 
   return (
-    <section className="myshkin-labs-home__hero p-4 w-full h-[calc(100vh-80px)] flex flex-col items-center justify-center">
+    <section className="myshkin-labs-home__hero py-4 w-full h-[calc(100vh-80px)] flex flex-col items-center justify-center">
       <div className="max-w-7xl mx-auto px-4 text-center">
         <h1 ref={h1Ref} className="font-extrabold tracking-tight leading-none">
           MИШKiN LAБS
