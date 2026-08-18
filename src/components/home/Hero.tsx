@@ -70,7 +70,7 @@ export default function Hero({}: HeroProps) {
 
         <div
           ref={expRef}
-          className="myshkin-labs-home__latest-experiment-container"
+          className="myshkin-labs-home__latest-experiment-container flex flex-col items-center"
           style={{ opacity: 0 }}
         >
           <p className="myshkin-labs-home__latest-experiment-label text-lg md:text-3xl font-bold text-center mt-8">
@@ -79,7 +79,7 @@ export default function Hero({}: HeroProps) {
           <Link
             ref={expLinkRef}
             href="/tools"
-            className="myshkin-labs-home__latest-experiment mt-6 text-sm block"
+            className="myshkin-labs-home__latest-experiment mt-6 text-sm block lg:max-w-[60%]"
             onMouseEnter={() => handleExpLinkHover(true)}
             onMouseLeave={() => handleExpLinkHover(false)}
           >
