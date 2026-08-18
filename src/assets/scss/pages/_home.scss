@@ -1,7 +1,9 @@
 @use "../abstracts/variables" as *;
 
 .myshkin-labs-home {
-  padding: 1rem;
+  // No padding here: the hero (p-4) and the content <main> (px-4) each bring
+  // their own gutter, so a wrapper padding would inset the home page further
+  // than every other page.
 
   h1 {
     font-size: clamp(3.5rem, 10vw, 10rem);

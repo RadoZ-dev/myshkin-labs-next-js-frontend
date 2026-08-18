@@ -11,16 +11,16 @@ export const metadata: Metadata = {
 export default function ToolsPage() {
   return (
     <main
-      className="container max-w-7xl px-4 py-4"
+      className="max-w-7xl px-4 py-4"
       style={{ margin: "0px auto" }}
     >
-      <div className="mx-auto px-4 max-w-7xl pt-8">
+      <div className="pt-8">
         <Link href="/" className="myshkin-labs-tools__back text-sm hover:underline">
           ← Back to home
         </Link>
       </div>
 
-      <div className="myshkin-labs-tools mx-auto px-4 max-w-7xl pt-8">
+      <div className="myshkin-labs-tools pt-8">
         <h1 className="myshkin-labs-tools__title">Tools</h1>
         <p className="myshkin-labs-tools__intro">
           Small interactive instruments for practising rhythm, melody and time.

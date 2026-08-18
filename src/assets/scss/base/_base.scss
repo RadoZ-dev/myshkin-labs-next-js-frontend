@@ -28,11 +28,11 @@ article:not(main article) {
     content: "";
     position: absolute;
     bottom: 0;
-    // Inset so the line keeps a gutter on pages where the element reaches the
-    // viewport edge; on the home page it already sits inside
-    // .myshkin-labs-home's padding, so this matches that look everywhere.
-    left: 1rem;
-    right: 1rem;
+    // Flush with the element's own box: every page already gives <main> /
+    // <article> a px-4 gutter, so an extra inset here would just stack on top
+    // of it — and stack twice on the home page, which adds its own padding.
+    left: 0;
+    right: 0;
     height: 24px;
     background: url("../../img/green-border-transparent.png") repeat-x center /
       auto 100%;
