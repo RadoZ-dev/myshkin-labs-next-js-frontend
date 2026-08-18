@@ -123,9 +123,13 @@
 
   &__intro {
     color: $color-foreground;
-    font-size: 0.9rem;
+    font-size: 1rem;
     line-height: 1.6;
     max-width: 46rem;
+
+    @media (min-width: 1024px) {
+      font-size: 1.25rem;
+    }
   }
 
   // --- Panels -----------------------------------------------------------------
