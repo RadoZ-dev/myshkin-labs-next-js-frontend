@@ -6,10 +6,10 @@ import Instruments from "./Instruments";
 export default function Content() {
   return (
     <main className="max-w-7xl px-4 py-4" style={{ margin: "0 auto" }}>
-      <Experiments />
-      <Notes />
+      {/* <Experiments />
+      <Notes /> */}
       <Releases />
-      <Instruments />
+      {/* <Instruments /> */}
     </main>
   );
 }
