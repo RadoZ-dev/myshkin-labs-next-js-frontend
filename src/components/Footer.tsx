@@ -5,7 +5,7 @@ export default function Footer() {
 
   return (
     <footer className="myshkin-labs-footer">
-      <div className="myshkin-labs-footer__inner max-w-7xl px-4">
+      <div className="myshkin-labs-footer__inner max-w-7xl">
         <p className="myshkin-labs-footer__copyright">
           © {year} Myshkin Labs. Sound. Code. Experiments.
         </p>

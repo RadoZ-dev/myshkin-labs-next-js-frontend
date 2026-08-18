@@ -5,10 +5,17 @@
 // -----------------------------------------------------------------------------
 
 .myshkin-labs-footer {
-  padding: 2rem 0 2.5rem;
+  padding: 1.5rem 0 2rem;
+
+  @media (min-width: $breakpoint-tablet) {
+    padding: 2rem 0 2.5rem;
+  }
 
   &__inner {
     margin: 0 auto;
+    // Matches the 1rem gutter used by .myshkin-labs-home
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   &__copyright {
