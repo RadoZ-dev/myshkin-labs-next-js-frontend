@@ -1,7 +1,10 @@
 @use "../abstracts/variables" as *;
 
 .myshkin-labs-header {
-  padding: calc(#{$spacing-unit} * 0.5) calc(#{$spacing-unit} * 1);
+  // Vertical only: the inner <nav> carries the same px-4 gutter as each page's
+  // <main>, so horizontal padding here would indent the logo further than the
+  // page content below it.
+  padding: calc(#{$spacing-unit} * 0.5) 0;
   background: $color-background;
   box-shadow: 0 -1rem 2rem rgba($color-foreground, 0.6);
 
