@@ -40,7 +40,7 @@ export default async function Instruments() {
         {instruments.map((instrument) => (
           <article
             key={instrument.id}
-            className="p-6 rounded-lg hover:shadow-lg transition-shadow"
+            className="py-2"
           >
             <div className="flex justify-between items-start mb-3">
               <h3 className="text-xl font-semibold">{instrument.title}</h3>
