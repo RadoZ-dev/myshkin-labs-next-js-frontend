@@ -46,4 +46,8 @@ p {
   // deliberate accent (e.g. the neon hero subtitle), but the default is white
   // everywhere so paragraphs stay consistent and readable on the dark ground.
   color: $color-foreground;
+
+  @media (min-width: 1024px) {
+    font-size: 1.25rem;
+  }
 }
