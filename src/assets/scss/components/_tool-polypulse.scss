@@ -29,12 +29,6 @@
     margin-bottom: 3rem;
   }
 
-  &__header-icon {
-    color: var(--pp-main);
-    display: block;
-    margin: 0 auto 0.75rem;
-  }
-
   // Two classes deep so this beats .myshkin-labs-tool__panel regardless of
   // @use order in main.scss (components are imported before pages).
   &__console.myshkin-labs-tool__panel {

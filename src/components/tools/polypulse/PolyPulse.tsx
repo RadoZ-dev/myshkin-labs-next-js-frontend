@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Play, Square, Sliders, Activity, Drum, Music } from "lucide-react";
+import { Play, Square, Sliders, Drum, Music } from "lucide-react";
 import { PolyrhythmAudioEngine } from "@/lib/tools/polypulse/audioEngine";
 
 /** Step cell state, consumed by CSS via the data-state attribute. */
