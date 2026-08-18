@@ -1,0 +1,351 @@
+@use "sass:color";
+@use "../abstracts/variables" as *;
+
+// -----------------------------------------------------------------------------
+// PolyPulse — polyrhythm metronome (/tools/polypulse)
+// Shared chrome (panels, sliders, buttons) lives in pages/_tools.scss
+//
+// Colour roles:
+//   Main rhythm      -> $color-green      (the site's structural accent)
+//   Counter rhythm   -> $color-neon-blue  (the lighter overlay voice)
+//   Main accent      -> $color-purple
+//   Secondary accent -> $color-royal-blue
+// -----------------------------------------------------------------------------
+
+.myshkin-labs-polypulse {
+  --pp-main: #{$color-green};
+  --pp-secondary: #{$color-neon-blue};
+  --pp-main-accent: #{$color-purple};
+  --pp-secondary-accent: #{$color-royal-blue};
+
+  &__header {
+    animation: polypulse-header-in 0.5s ease-out both;
+  }
+
+  &__intro {
+    // The tool root is a centred flex column, so the intro needs to opt out of
+    // that alignment to sit left like the Melodic Shapes intro.
+    align-self: flex-start;
+    margin-bottom: 3rem;
+  }
+
+  &__header-icon {
+    color: var(--pp-main);
+    display: block;
+    margin: 0 auto 0.75rem;
+  }
+
+  // Two classes deep so this beats .myshkin-labs-tool__panel regardless of
+  // @use order in main.scss (components are imported before pages).
+  &__console.myshkin-labs-tool__panel {
+    overflow: hidden;
+    padding: 2rem 1.75rem;
+    margin-bottom: 2rem;
+
+    // Decorative dot grid, previously an inline style
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.05;
+      background-image: radial-gradient($color-primary 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+  }
+
+  &__transport {
+    border-bottom: 1px solid rgba($color-primary, 0.12);
+
+    @media (min-width: $breakpoint-tablet) {
+      border-bottom: none;
+      border-right: 1px solid rgba($color-primary, 0.12);
+    }
+  }
+
+  // --- Transport --------------------------------------------------------------
+
+  &__play {
+    width: 8rem;
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid var(--pp-main);
+    color: var(--pp-main);
+    background: rgba($color-green, 0.1);
+    box-shadow: 0 0 20px rgba($color-green, 0.2);
+    cursor: pointer;
+    transition:
+      transform 0.2s ease,
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      color 0.3s ease,
+      box-shadow 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &[data-playing="true"] {
+      border-color: var(--pp-secondary-accent);
+      color: var(--pp-secondary-accent);
+      background: rgba($color-royal-blue, 0.12);
+      box-shadow: 0 0 20px rgba($color-royal-blue, 0.25);
+    }
+  }
+
+  &__controls {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__tempo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    // Separate the tempo slider from the beat controls below
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba($color-primary, 0.08);
+  }
+
+  &__bpm {
+    // On mobile the console stacks into one column, so the readout needs room
+    // above the divider. From tablet up the transport sits in its own column
+    // and the grid gap handles it.
+    margin-bottom: 1.5rem;
+
+    @media (min-width: $breakpoint-tablet) {
+      margin-bottom: 0;
+    }
+  }
+
+  &__bpm-value {
+    display: block;
+    font-variant-numeric: tabular-nums;
+    font-size: 1.875rem;
+    font-weight: 700;
+    line-height: 1;
+    color: $color-primary;
+  }
+
+  &__bpm-label {
+    display: block;
+    font-size: 0.625rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba($color-foreground, 0.75);
+  }
+
+  &__beat-count {
+    font-variant-numeric: tabular-nums;
+    font-size: 1.5rem;
+    font-weight: 700;
+    width: 3rem;
+    color: $color-primary;
+  }
+
+  // --- Tracks -----------------------------------------------------------------
+
+  &__tracks {
+    gap: 1.75rem;
+    // Last element now that the footer is gone — the tool block's own
+    // padding-bottom provides the space below.
+    margin-bottom: 0;
+  }
+
+  &__track-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  &__track-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.25rem;
+  }
+
+  &__track-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    // base/_typography.scss gives h2 a 1.5rem bottom margin
+    margin-bottom: 0;
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba($color-foreground, 0.75);
+  }
+
+  &__track-hint {
+    font-size: 0.65rem;
+    font-style: italic;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba($color-foreground, 0.7);
+    white-space: nowrap;
+  }
+
+  &__pulse {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    animation: polypulse-blink 2s ease-in-out infinite;
+
+    &--main {
+      background: var(--pp-main);
+    }
+
+    &--secondary {
+      background: var(--pp-secondary);
+    }
+  }
+
+  // --- Step cells -------------------------------------------------------------
+  //
+  // These retrigger up to ~8Hz. CSS transitions on a data-state swap keep the
+  // work on the compositor instead of re-rendering an animation library per beat.
+
+  // Each track fills the full row width and its cells share it equally, so a
+  // 4-beat row and a 3-beat row span the same distance — that equal span is
+  // what makes the polyrhythm legible.
+  &__track {
+    display: flex;
+    width: 100%;
+    gap: 0.375rem;
+
+    @media (min-width: $breakpoint-tablet) {
+      gap: 0.5rem;
+    }
+  }
+
+  &__step {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border: 2px solid rgba($color-primary, 0.12);
+    background: rgba($color-primary, 0.05);
+    cursor: pointer;
+    transition:
+      background-color 0.1s ease,
+      border-color 0.1s ease,
+      transform 0.1s ease,
+      box-shadow 0.1s ease;
+
+    @media (min-width: $breakpoint-tablet) {
+      height: 4rem;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &--main {
+      --step-active: var(--pp-main);
+      --step-active-glow: #{rgba($color-green, 0.4)};
+      --step-accent: var(--pp-main-accent);
+      --step-accent-glow: #{rgba($color-purple, 0.25)};
+    }
+
+    &--secondary {
+      --step-active: var(--pp-secondary);
+      --step-active-glow: #{rgba($color-neon-blue, 0.4)};
+      --step-accent: var(--pp-secondary-accent);
+      --step-accent-glow: #{rgba($color-royal-blue, 0.25)};
+    }
+
+    &[data-state="active"] {
+      background: var(--step-active);
+      border-color: var(--step-active);
+      // scale() on a flex child would distort the equal-width row, so lift
+      // the cell instead of growing it
+      transform: translateY(-4px);
+      box-shadow: 0 0 20px var(--step-active-glow);
+
+      .myshkin-labs-polypulse__step-number {
+        color: $color-background;
+      }
+    }
+
+    &[data-state="accent"] {
+      background: var(--step-accent);
+      border-color: var(--step-accent);
+      box-shadow: 0 0 15px var(--step-accent-glow);
+
+      .myshkin-labs-polypulse__step-number {
+        color: $color-primary;
+      }
+    }
+  }
+
+  &__step-number {
+    font-variant-numeric: tabular-nums;
+    font-size: 0.75rem;
+    color: rgba($color-foreground, 0.7);
+    transition: color 0.1s ease;
+    // Cells get narrow at high beat counts; the label is decorative so let it
+    // clip rather than force the row wider.
+    overflow: hidden;
+    text-overflow: clip;
+  }
+
+  &__step-marker {
+    position: absolute;
+    top: -0.25rem;
+    left: -0.25rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: rgba($color-foreground, 0.6);
+  }
+
+  // --- Accent words in the intro ------------------------------------------------
+
+  &__spec-main {
+    color: var(--pp-main);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  &__spec-secondary {
+    color: var(--pp-secondary);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+}
+
+@keyframes polypulse-header-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes polypulse-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
