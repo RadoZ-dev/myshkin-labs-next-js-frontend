@@ -1,14 +1,17 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { getPostTypeLabel, LatestPostNode } from "@/lib/wordpress";
+import Link from "next/link";
+import { LatestPostNode } from "@/lib/wordpress";
 import gsap from "gsap";
 
 interface HeroProps {
-  latestPost: LatestPostNode | null;
+  // Kept so Home.tsx's existing call site still type-checks. The hero now
+  // links to /tools rather than the latest WordPress post.
+  latestPost?: LatestPostNode | null;
 }
 
-export default function Hero({ latestPost }: HeroProps) {
+export default function Hero({}: HeroProps) {
   const h1Ref = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const expRef = useRef<HTMLDivElement>(null);
@@ -29,14 +32,14 @@ export default function Hero({ latestPost }: HeroProps) {
   }, []);
 
   useEffect(() => {
-    if (latestPost && expRef.current) {
+    if (expRef.current) {
       gsap.fromTo(
         expRef.current,
         { opacity: 0 },
         { opacity: 1, duration: 0.6, delay: 0.5 },
       );
     }
-  }, [latestPost]);
+  }, []);
 
   const handleExpLinkHover = (isHovering: boolean) => {
     if (expLinkRef.current) {
@@ -60,37 +63,35 @@ export default function Hero({ latestPost }: HeroProps) {
 
         <p
           ref={subtitleRef}
-          className="myshkin-labs-home__subtitle mt-4 text-lg text-gray-500 dark:text-gray-400"
+          className="myshkin-labs-home__subtitle mt-4 text-lg"
         >
           Sound. Code. Experiments.
         </p>
 
-        {latestPost && (
-          <div
-            ref={expRef}
-            className="myshkin-labs-home__latest-experiment-container"
-            style={{ opacity: 0 }}
+        <div
+          ref={expRef}
+          className="myshkin-labs-home__latest-experiment-container"
+          style={{ opacity: 0 }}
+        >
+          <p className="myshkin-labs-home__latest-experiment-label text-lg md:text-3xl font-bold text-center mt-8">
+            Play with the instruments:
+          </p>
+          <Link
+            ref={expLinkRef}
+            href="/tools"
+            className="myshkin-labs-home__latest-experiment mt-6 text-sm font-mono block"
+            onMouseEnter={() => handleExpLinkHover(true)}
+            onMouseLeave={() => handleExpLinkHover(false)}
           >
-            <p className="myshkin-labs-home__latest-experiment-label text-lg md:text-3xl font-bold text-center mt-8">
-              Latest {getPostTypeLabel(latestPost.type)}:
-            </p>
-            <a
-              ref={expLinkRef}
-              href={latestPost.uri}
-              className="myshkin-labs-home__latest-experiment mt-6 text-sm font-mono text-gray-600 dark:text-gray-300 block"
-              onMouseEnter={() => handleExpLinkHover(true)}
-              onMouseLeave={() => handleExpLinkHover(false)}
-            >
-              {latestPost.title}
-            </a>
-            <a
-              href={latestPost.uri}
-              className="myshkin-labs-home__read-more button mt-6 inline-block  px-8 py-4 text-base font-mono bg-white text-black rounded-full hover:bg-gray-100 transition-colors"
-            >
-              Read more →
-            </a>
-          </div>
-        )}
+            Rhythm & melody tools you can use in the browser
+          </Link>
+          <Link
+            href="/tools"
+            className="myshkin-labs-home__read-more button mt-6 inline-block  px-8 py-4 text-base font-mono bg-white text-black rounded-full hover:bg-gray-100 transition-colors"
+          >
+            Open tools →
+          </Link>
+        </div>
       </div>
     </section>
   );
