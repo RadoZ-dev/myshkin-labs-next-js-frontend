@@ -8,7 +8,7 @@ export default function Content() {
     <main className="max-w-7xl px-4 py-4" style={{ margin: "0 auto" }}>
       {/* <Experiments />
       <Notes /> */}
-      <Releases />
+      {/* <Releases /> */}
       {/* <Instruments /> */}
     </main>
   );

@@ -193,7 +193,7 @@ export default function Header() {
     // { label: "Experiments", href: "/experiments" },
     // { label: "Notes", href: "/notes" },
     // { label: "Instruments", href: "/instruments" },
-    { label: "Releases", href: "/releases" },
+    // { label: "Releases", href: "/releases" },
     { label: "Tools", href: "/tools" },
   ];
 
