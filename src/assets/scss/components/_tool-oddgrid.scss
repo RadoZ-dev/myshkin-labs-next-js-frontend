@@ -1,0 +1,307 @@
+@use "sass:color";
+@use "../abstracts/variables" as *;
+
+// -----------------------------------------------------------------------------
+// Oddgrid — multi-subdivision step sequencer (/tools/oddgrid)
+// Shared chrome (panels, sliders, selects, buttons) lives in pages/_tools.scss
+//
+// Each lane is coloured by its subdivision family, so the odd lanes are
+// distinguishable from the ordinary power-of-two grid at a glance:
+//   pow2  -> $color-neon-blue  (2, 4, 8, 16 — the plain grid)
+//   trip  -> amber             (divisible by 3)
+//   quint -> $color-purple     (divisible by 5)
+//   sept  -> $color-green      (divisible by 7)
+//   odd   -> coral             (everything else)
+// -----------------------------------------------------------------------------
+
+$oddgrid-trip: #ffb454;
+$oddgrid-odd: #ff7a7a;
+
+.myshkin-labs-oddgrid {
+  &__intro {
+    margin-bottom: 2rem;
+  }
+
+  // --- Transport bar ----------------------------------------------------------
+
+  &__bar.myshkin-labs-tool__panel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 1.5rem;
+    padding: 1.25rem 1.5rem;
+  }
+
+  &__bar-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 0;
+
+    &--wide {
+      flex: 1;
+      min-width: 10rem;
+    }
+  }
+
+  &__bar-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  // --- Inputs -----------------------------------------------------------------
+
+  &__number,
+  &__text {
+    width: 100%;
+    min-width: 0;
+    padding: 0.4rem 0.6rem;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+    color: $color-foreground;
+    background: rgba($color-primary, 0.06);
+    border: 1px solid rgba($color-primary, 0.16);
+    border-radius: 0.375rem;
+
+    &:focus-visible {
+      outline: 2px solid var(--og-accent);
+      outline-offset: 1px;
+    }
+  }
+
+  &__number {
+    max-width: 6rem;
+
+    &--tight {
+      width: 3.2rem;
+      text-align: center;
+    }
+  }
+
+  &__mute {
+    flex: none;
+    width: 2rem;
+    padding: 0.4rem 0;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: $color-foreground;
+    background: rgba($color-primary, 0.06);
+    border: 1px solid rgba($color-primary, 0.16);
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease;
+
+    &:hover {
+      border-color: rgba($color-primary, 0.35);
+    }
+
+    &[data-on="true"] {
+      color: $color-foreground;
+      background: $color-royal-blue;
+      border-color: $color-royal-blue;
+    }
+  }
+
+  // --- Lanes ------------------------------------------------------------------
+
+  &__lanes {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__lane {
+    // Default accent; each subdivision family overrides it below.
+    --og-accent: #{$color-neon-blue};
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid rgba($color-primary, 0.12);
+
+    &:last-child {
+      border-bottom: 1px solid rgba($color-primary, 0.12);
+    }
+
+    @media (min-width: $breakpoint-desktop) {
+      grid-template-columns: 15rem 1fr;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    &[data-family="pow2"] {
+      --og-accent: #{$color-neon-blue};
+    }
+    &[data-family="trip"] {
+      --og-accent: #{$oddgrid-trip};
+    }
+    &[data-family="quint"] {
+      --og-accent: #{$color-purple};
+    }
+    &[data-family="sept"] {
+      --og-accent: #{$color-green};
+    }
+    &[data-family="odd"] {
+      --og-accent: #{$oddgrid-odd};
+    }
+  }
+
+  &__controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  &__control-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+
+    &--ratio {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__ratio-text {
+    font-size: 0.7rem;
+    color: rgba($color-foreground, 0.7);
+    white-space: nowrap;
+  }
+
+  &__control-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 0;
+  }
+
+  // --- Step grid --------------------------------------------------------------
+
+  &__grid-wrap {
+    min-width: 0;
+  }
+
+  &__ruler {
+    display: grid;
+    height: 0.7rem;
+    margin-bottom: 0.2rem;
+
+    i {
+      font-style: normal;
+      font-size: 0.55rem;
+      line-height: 0.7rem;
+      color: rgba($color-foreground, 0.5);
+      border-left: 1px solid rgba($color-primary, 0.16);
+      padding-left: 0.2rem;
+    }
+  }
+
+  &__steps {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  &__step {
+    height: 2.1rem;
+    min-width: 0;
+    padding: 0;
+    border: 1px solid rgba($color-primary, 0.16);
+    border-radius: 0.2rem;
+    background: rgba($color-primary, 0.04);
+    cursor: pointer;
+    transition: transform 0.06s ease;
+
+    &:active {
+      transform: scale(0.94);
+    }
+
+    // 1 = note, 2 = accent. The accent gets a white rim and full opacity.
+    &[data-v="1"] {
+      background: var(--og-accent);
+      border-color: var(--og-accent);
+      opacity: 0.62;
+    }
+
+    &[data-v="2"] {
+      background: var(--og-accent);
+      border-color: $color-primary;
+      opacity: 1;
+    }
+
+    &[data-head="true"] {
+      box-shadow: inset 0 0 0 2px $color-primary;
+    }
+  }
+
+  &__count {
+    margin-top: 0.45rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: rgba($color-foreground, 0.7);
+
+    em {
+      font-style: normal;
+      color: var(--og-accent);
+    }
+  }
+
+  &__fader {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+
+    // The shared slider defaults to neon blue; follow the lane instead.
+    .myshkin-labs-tool__slider {
+      --slider-accent: var(--og-accent);
+      accent-color: var(--og-accent);
+    }
+  }
+
+  &__fader-value {
+    width: 2rem;
+    font-size: 0.65rem;
+    text-align: right;
+    color: rgba($color-foreground, 0.7);
+  }
+
+  // --- Explanatory notes ------------------------------------------------------
+
+  &__notes {
+    max-width: 46rem;
+    margin-top: 2.5rem;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: rgba($color-foreground, 0.8);
+
+    p {
+      margin-bottom: 0.75rem;
+    }
+
+    em {
+      font-style: italic;
+      color: $color-foreground;
+    }
+  }
+
+  &__notes-title {
+    margin: 1.25rem 0 0.4rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: $color-primary;
+  }
+}

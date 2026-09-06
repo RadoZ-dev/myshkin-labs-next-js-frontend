@@ -1,0 +1,29 @@
+import Link from "next/link";
+import type { Metadata } from "next";
+import Oddgrid from "@/components/tools/oddgrid/Oddgrid";
+import { getTool } from "@/lib/tools/registry";
+
+const tool = getTool("oddgrid")!;
+
+export const metadata: Metadata = {
+  title: `${tool.name} | MИШKiN LAБS`,
+  description: tool.description,
+};
+
+export default function OddgridPage() {
+  return (
+    <main
+      className="max-w-7xl px-4 py-4"
+      style={{ margin: "0px auto" }}
+    >
+      <div className="pt-8">
+        <Link href="/tools" className="myshkin-labs-tools__back text-sm hover:underline">
+          ← Back to tools
+        </Link>
+      </div>
+      <div className="pt-8">
+        <Oddgrid />
+      </div>
+    </main>
+  );
+}

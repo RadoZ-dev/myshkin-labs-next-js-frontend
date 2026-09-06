@@ -42,6 +42,14 @@ export const TOOLS: ToolMeta[] = [
       "Generates melodic contours and rhythms as raw material for improvisation. Renders them in standard notation and plays them back over a click.",
     accent: "neon-blue",
   },
+  {
+    slug: "oddgrid",
+    name: "PolyPulse Drum Trainer",
+    tagline: "Odd Subdivisions, Side by Side",
+    description:
+      "A step sequencer where every lane keeps its own subdivision. Set quintuplets against straight sixteenths, or 7-over-4 against a triplet, and hear how they fall.",
+    accent: "neon-blue",
+  },
 ];
 
 export function getTool(slug: string): ToolMeta | undefined {
