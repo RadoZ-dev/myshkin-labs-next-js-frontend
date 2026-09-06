@@ -81,7 +81,8 @@ $oddgrid-odd: #ff7a7a;
     }
   }
 
-  &__mute {
+  // Mute / solo. Both share a shape; only the lit colour differs.
+  &__toggle {
     flex: none;
     width: 2rem;
     padding: 0.4rem 0;
@@ -101,10 +102,17 @@ $oddgrid-odd: #ff7a7a;
       border-color: rgba($color-primary, 0.35);
     }
 
-    &[data-on="true"] {
+    &--mute[data-on="true"] {
       color: $color-foreground;
       background: $color-royal-blue;
       border-color: $color-royal-blue;
+    }
+
+    // Dark text on green — white would sit at 1.9:1 here.
+    &--solo[data-on="true"] {
+      color: $color-background;
+      background: $color-green;
+      border-color: $color-green;
     }
   }
 
@@ -149,6 +157,14 @@ $oddgrid-odd: #ff7a7a;
     }
     &[data-family="odd"] {
       --og-accent: #{$oddgrid-odd};
+    }
+
+    // Silent because it is muted, or because another lane is soloed. The
+    // controls keep full contrast so they stay readable and obviously live.
+    &[data-silent="true"] {
+      .myshkin-labs-oddgrid__grid-wrap {
+        opacity: 0.4;
+      }
     }
   }
 

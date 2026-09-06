@@ -7,6 +7,7 @@ import {
   OddgridAudioEngine,
   PRESETS,
   VOICES,
+  isAudible,
   resizeSteps,
   stepCount,
   subdivisionFamily,
@@ -38,6 +39,7 @@ function makeLane(
     voice,
     gain: 0.8,
     mute: false,
+    solo: false,
     steps: [],
   };
   const length = stepCount(lane);
@@ -199,6 +201,8 @@ export default function Oddgrid() {
     );
   }, []);
 
+  const anySolo = lanes.some((lane) => lane.solo);
+
   return (
     <div className="myshkin-labs-tool myshkin-labs-oddgrid">
       <header className="myshkin-labs-tool__header">
@@ -282,6 +286,8 @@ export default function Oddgrid() {
       <div className="myshkin-labs-oddgrid__lanes">
         {lanes.map((lane) => {
           const head = isPlaying ? heads[lane.id] : undefined;
+          // Dim lanes that are silent, so a solo elsewhere is visible here.
+          const silent = !isAudible(lane, anySolo);
           const msPerStep = ((lane.d / lane.n) * (60 / bpm) * 1000).toFixed(1);
 
           return (
@@ -289,6 +295,7 @@ export default function Oddgrid() {
               key={lane.id}
               className="myshkin-labs-oddgrid__lane"
               data-family={subdivisionFamily(lane.n)}
+              data-silent={silent}
             >
               {/* Lane controls */}
               <div className="myshkin-labs-oddgrid__controls">
@@ -302,12 +309,22 @@ export default function Oddgrid() {
                   <button
                     type="button"
                     onClick={() => updateLane(lane.id, { mute: !lane.mute })}
-                    className="myshkin-labs-oddgrid__mute"
+                    className="myshkin-labs-oddgrid__toggle myshkin-labs-oddgrid__toggle--mute"
                     data-on={lane.mute}
                     aria-pressed={lane.mute}
                     aria-label={`Mute ${lane.name}`}
                   >
                     M
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => updateLane(lane.id, { solo: !lane.solo })}
+                    className="myshkin-labs-oddgrid__toggle myshkin-labs-oddgrid__toggle--solo"
+                    data-on={lane.solo}
+                    aria-pressed={lane.solo}
+                    aria-label={`Solo ${lane.name}`}
+                  >
+                    S
                   </button>
                 </div>
 

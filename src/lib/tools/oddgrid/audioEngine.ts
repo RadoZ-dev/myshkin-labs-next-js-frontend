@@ -36,7 +36,19 @@ export interface Lane {
   /** Lane level, 0-1. */
   gain: number;
   mute: boolean;
+  /** While any lane is soloed, only soloed lanes sound. */
+  solo: boolean;
   steps: StepValue[];
+}
+
+/**
+ * Whether a lane sounds, given the state of the whole kit. Solo is a kit-wide
+ * property — one lane soloed silences every un-soloed lane — so audibility can
+ * never be read off a single lane. An explicit mute still wins over solo.
+ */
+export function isAudible(lane: Lane, anySolo: boolean): boolean {
+  if (lane.mute) return false;
+  return anySolo ? lane.solo : true;
 }
 
 /** Subdivision presets offered in each lane's dropdown. */
@@ -117,6 +129,8 @@ export class OddgridAudioEngine {
   private bpm = 100;
   private vol = 0.7;
   private lanes: Lane[] = [];
+  /** Cached from the lane list, since every hit and bus update consults it. */
+  private anySolo = false;
   private runtime = new Map<number, LaneRuntime>();
 
   public get playing(): boolean {
@@ -149,6 +163,7 @@ export class OddgridAudioEngine {
    */
   public setLanes(lanes: Lane[]) {
     this.lanes = lanes;
+    this.anySolo = lanes.some((l) => l.solo);
 
     // Drop runtime for lanes that no longer exist, releasing their bus.
     for (const [id, rt] of this.runtime) {
@@ -162,7 +177,7 @@ export class OddgridAudioEngine {
       const rt = this.runtime.get(lane.id);
       if (rt?.bus) {
         rt.bus.gain.setTargetAtTime(
-          lane.mute ? 0 : lane.gain,
+          isAudible(lane, this.anySolo) ? lane.gain : 0,
           this.currentTime,
           0.01, // ramp, so level changes don't click
         );
@@ -191,7 +206,7 @@ export class OddgridAudioEngine {
     }
     if (!rt.bus) {
       rt.bus = ctx.createGain();
-      rt.bus.gain.value = lane.mute ? 0 : lane.gain;
+      rt.bus.gain.value = isAudible(lane, this.anySolo) ? lane.gain : 0;
       rt.bus.connect(this.master!);
     }
     return rt.bus;
@@ -345,7 +360,7 @@ export class OddgridAudioEngine {
         // A lane's step array can shrink under us when the ratio changes.
         const index = rt.step % lane.steps.length;
         const v = lane.steps[index];
-        if (v && !lane.mute) {
+        if (v && isAudible(lane, this.anySolo)) {
           const vel =
             v === 2 ? Math.min(127, lane.vel + ACCENT_VELOCITY_BOOST) : lane.vel;
           this.hit(lane.voice, rt.nextTime, vel, lane.note, this.busFor(lane));
