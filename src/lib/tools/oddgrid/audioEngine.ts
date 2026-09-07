@@ -110,6 +110,12 @@ interface LaneRuntime {
   step: number;
   queue: QueuedStep[];
   bus: GainNode | null;
+  /**
+   * The `n/d` ratio and length this lane's `nextTime` was derived from. When
+   * the lane's own values move away from these, its phase is stale and has to
+   * be recomputed from the shared origin.
+   */
+  scheduledFor: { n: number; d: number; lengthBeats: number } | null;
 }
 
 const TICK_MS = 25; // scheduler wakeup interval
@@ -132,6 +138,15 @@ export class OddgridAudioEngine {
   /** Cached from the lane list, since every hit and bus update consults it. */
   private anySolo = false;
   private runtime = new Map<number, LaneRuntime>();
+
+  /**
+   * AudioContext time of beat zero — the musical origin every lane measures
+   * from. Because each lane's position is derived from this rather than
+   * accumulated per lane, a lane whose subdivision changes mid-playback can be
+   * re-derived and land exactly on the shared grid instead of keeping the
+   * phase it happened to have when it was edited.
+   */
+  private origin = 0;
 
   public get playing(): boolean {
     return this.timerId !== null;
@@ -186,7 +201,24 @@ export class OddgridAudioEngine {
   }
 
   public setBpm(bpm: number) {
+    if (bpm === this.bpm) return;
     this.bpm = bpm;
+
+    // The origin is an absolute time, so at a new tempo the elapsed seconds
+    // since it would map to a different musical position and every lane would
+    // jump. Re-anchor to the earliest not-yet-scheduled moment and let each
+    // lane continue from there at the new rate.
+    if (this.playing && this.runtime.size) {
+      let next = Infinity;
+      for (const rt of this.runtime.values()) next = Math.min(next, rt.nextTime);
+      if (Number.isFinite(next)) {
+        this.origin = next;
+        for (const lane of this.lanes) {
+          const rt = this.runtime.get(lane.id);
+          if (rt) this.rephase(lane, rt, next);
+        }
+      }
+    }
   }
 
   public setVolume(vol: number) {
@@ -201,7 +233,7 @@ export class OddgridAudioEngine {
     const ctx = this.ensureContext();
     let rt = this.runtime.get(lane.id);
     if (!rt) {
-      rt = { nextTime: 0, step: 0, queue: [], bus: null };
+      rt = { nextTime: 0, step: 0, queue: [], bus: null, scheduledFor: null };
       this.runtime.set(lane.id, rt);
     }
     if (!rt.bus) {
@@ -346,6 +378,40 @@ export class OddgridAudioEngine {
     return (lane.d / lane.n) * this.beatDur();
   }
 
+  /**
+   * Re-derive a lane's next step and its time from the shared origin, so it
+   * lines up with the grid rather than with whatever phase it had before. Used
+   * when a lane's subdivision or length changes during playback.
+   */
+  private rephase(lane: Lane, rt: LaneRuntime, from: number) {
+    const sd = this.stepDur(lane);
+    if (!Number.isFinite(sd) || sd <= 0) return;
+
+    const elapsed = Math.max(0, from - this.origin);
+    // Steps completed since the origin, rounded up so we never schedule a step
+    // whose time has already passed.
+    const stepsSoFar = Math.ceil(elapsed / sd - 1e-9);
+
+    rt.step = stepsSoFar % lane.steps.length;
+    rt.nextTime = this.origin + stepsSoFar * sd;
+    // Queued steps at or after the new boundary belonged to the old
+    // subdivision and are replaced; earlier ones are already sounding and are
+    // kept so the playhead does not stall.
+    rt.queue = rt.queue.filter((q) => q.at < from);
+    rt.scheduledFor = { n: lane.n, d: lane.d, lengthBeats: lane.lengthBeats };
+  }
+
+  /** Whether a lane's cached phase still matches its current settings. */
+  private phaseIsStale(lane: Lane, rt: LaneRuntime): boolean {
+    const s = rt.scheduledFor;
+    return (
+      !s ||
+      s.n !== lane.n ||
+      s.d !== lane.d ||
+      s.lengthBeats !== lane.lengthBeats
+    );
+  }
+
   private scheduler = () => {
     if (!this.ctx) return;
     const horizon = this.ctx.currentTime + LOOKAHEAD;
@@ -355,6 +421,15 @@ export class OddgridAudioEngine {
       if (!rt) continue;
       const sd = this.stepDur(lane);
       if (!Number.isFinite(sd) || sd <= 0) continue;
+
+      // A subdivision edited mid-playback would otherwise keep the phase it
+      // had when it was changed, drifting against every other lane.
+      // Re-derive from rt.nextTime, not from now: everything before it has
+      // already been handed to the audio clock and will sound regardless, so
+      // starting earlier would double-trigger those steps.
+      if (this.phaseIsStale(lane, rt)) {
+        this.rephase(lane, rt, rt.nextTime);
+      }
 
       while (rt.nextTime < horizon) {
         // A lane's step array can shrink under us when the ratio changes.
@@ -378,12 +453,14 @@ export class OddgridAudioEngine {
     this.stop();
 
     const t0 = ctx.currentTime + 0.1;
+    this.origin = t0; // beat zero: every lane's phase is measured from here
     for (const lane of this.lanes) {
       this.busFor(lane); // creates runtime as a side effect
       const rt = this.runtime.get(lane.id)!;
       rt.nextTime = t0;
       rt.step = 0;
       rt.queue = [];
+      rt.scheduledFor = { n: lane.n, d: lane.d, lengthBeats: lane.lengthBeats };
     }
 
     this.scheduler();
